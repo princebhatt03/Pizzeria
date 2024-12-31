@@ -5,7 +5,11 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>Pizzeria</title>
+    <link
+      rel="shortcut icon"
+      href="/images/logo.png"
+      type="image/x-icon" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet" />
@@ -29,7 +33,7 @@
   <body>
     <div id="main">
       <div
-        class="w-full relative h-screen bg-red-400"
+        class="w-full relative h-screen"
         id="page1">
         <div
           class="flex bg-yellow-50 justify-between items-center w-full h-20"
@@ -39,7 +43,6 @@
               class="w-48 h-20 object-contain mx-2 p-2"
               src="/images/logo.png"
               alt="LogoIMage" />
-            <!-- <h2 class="font-semibold text-2xl">Pizzeria</h2> -->
           </div>
           <div
             class="w-1/2 h-full sm:flex justify-evenly items-center text-center nav2 hidden">
@@ -110,6 +113,32 @@
               class="w-20 h-5 bg-orange-500 p-5 text-center flex justify-center items-center rounded-full">
               <i class="ri-shopping-cart-2-fill"></i></button
           ></a>
+        </div>
+        <div
+          id="page1-container1"
+          class="w-full sm:flex justify-between items-center h-[calc(100%-80px)] bg-[#fddede]">
+          <div
+            class="sm:w-1/2 sm:h-full h-1/2 p-5 flex items-center justify-center one">
+            <div>
+              <p class="sm:text-xl text-lg mt-2 font-semibold">
+                Are you Hungry?
+              </p>
+              <h1 class="sm:text-7xl text-4xl mt-2 font-semibold">
+                Don't Wait !
+              </h1>
+              <button
+                class="w-40 h-10 mt-4 bg-orange-500 text-center rounded-full">
+                Order Now
+              </button>
+            </div>
+          </div>
+          <div
+            class="sm:w-1/2 sm:h-full relative h-1/2 flex items-center justify-center p-4 two">
+            <img
+              class="object-contain left-9 absolute w-[90%] h-[90%]"
+              src="/images/hero-pizza.png"
+              alt="Hero hero-pizza" />
+          </div>
         </div>
       </div>
     </div>
