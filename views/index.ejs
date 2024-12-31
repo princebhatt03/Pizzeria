@@ -7,12 +7,112 @@
       content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet" />
+    <link
       href="/stylesheets/style.css"
       rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div class="w-full h-screen bg-red-700 absolute top-0">
-      <h1 class="text-white text-center text-3xl">Hello World</h1>
+    <div id="main">
+      <div
+        class="w-full relative h-screen bg-red-400"
+        id="page1">
+        <div
+          class="flex bg-yellow-50 justify-between items-center w-full h-20"
+          id="navbar">
+          <div class="flex justify-start items-center w-1/2 h-full nav1">
+            <img
+              class="w-48 h-20 object-contain mx-2 p-2"
+              src="/images/logo.png"
+              alt="LogoIMage" />
+            <!-- <h2 class="font-semibold text-2xl">Pizzeria</h2> -->
+          </div>
+          <div
+            class="w-1/2 h-full sm:flex justify-evenly items-center text-center nav2 hidden">
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Menu</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Offers</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Register</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Login</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              ><button
+                class="w-20 h-5 bg-orange-500 p-5 text-center flex justify-center items-center rounded-full">
+                <i class="ri-shopping-cart-2-fill"></i></button
+            ></a>
+          </div>
+          <div class="sm:hidden bars">
+            <i
+              id="menu1"
+              class="text-3xl p-4 ri-menu-line transition-all duration-900 ease-in-out"></i>
+            <i
+              id="menu2"
+              class="hidden text-3xl p-4 ri-close-line transition-all duration-900 ease-in-out"></i>
+          </div>
+        </div>
+        <div
+          id="nav-menu"
+          class="w-[90%] transition-all duration-900 ease-in-out absolute left-[100%] rounded-lg bg-yellow-50 h-50 flex justify-center shadow-2xl items-center flex-col p-2 m-4 sm:hidden">
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Menu</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Offers</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Register</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Login</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            ><button
+              class="w-20 h-5 bg-orange-500 p-5 text-center flex justify-center items-center rounded-full">
+              <i class="ri-shopping-cart-2-fill"></i></button
+          ></a>
+        </div>
+      </div>
     </div>
+    <script src="/javascripts/script.js"></script>
   </body>
 </html>
