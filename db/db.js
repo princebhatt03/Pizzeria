@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+const mongoUri = process.env.DATABASE_CONNECTION_STRING;
 
 mongoose
-  .connect('mongodb://0.0.0.0/Pizza_DATABASE')
+  .connect(mongoUri)
   .then(() => {
     console.log('Connected to database');
   })
