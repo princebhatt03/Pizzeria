@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet" />
+    <link
+      href="/stylesheets/style.css"
+      rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div
+        class="w-full relative h-screen"
+        id="page1">
+        <div
+          class="flex bg-yellow-50 justify-between items-center w-full h-20"
+          id="navbar">
+          <div class="flex justify-start items-center w-1/2 h-full nav1">
+            <img
+              class="w-48 h-20 object-contain mx-2 p-2"
+              src="/images/logo.png"
+              alt="LogoIMage" />
+          </div>
+          <div
+            class="w-1/2 h-full sm:flex justify-evenly items-center text-center nav2 hidden">
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Menu</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Offers</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="/reg"
+              >Register</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="/login"
+              >Login</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="/cart"
+              ><button
+                class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
+                <i class="ri-shopping-cart-2-fill"></i></button
+            ></a>
+          </div>
+          <div class="sm:hidden bars">
+            <i
+              id="menu1"
+              class="text-3xl p-4 ri-menu-line transition-all duration-900 ease-in-out"></i>
+            <i
+              id="menu2"
+              class="hidden text-3xl p-4 ri-close-line transition-all duration-900 ease-in-out"></i>
+          </div>
+        </div>
+        <div
+          id="nav-menu"
+          class="w-[90%] transition-all duration-900 ease-in-out absolute left-[100%] rounded-lg bg-yellow-50 h-50 flex justify-center shadow-2xl items-center flex-col p-2 m-4 sm:hidden">
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Menu</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Offers</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="/reg"
+            >Register</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="/login"
+            >Login</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="/cart"
+            ><button
+              class="w-20 h-5 bg-orange-500 p-5 text-center flex justify-center items-center rounded-full">
+              <i class="ri-shopping-cart-2-fill"></i></button
+          ></a>
+        </div>
+        <div
+          class="w-full flex items-center justify-center h-[calc(100%-80px)] bg-[#fddede]"
+          id="page1-container1">
+          <div
+            class="bg-yellow-50 flex items-start p-4 justify-center flex-col sm:w-[30%] w-[90%] h-[50%]"
+            id="login-box">
+            <h3 class="text-lg my-2 font-semibold">Username</h3>
+            <input
+              class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
+              type="text"
+              placeholder="Username" />
+            <h3 class="text-lg my-2 font-semibold">Password</h3>
+            <input
+              class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
+              type="text"
+              placeholder="Password" />
+            <div
+              class="flex flex-row items-center p-5 gap-6 justify-between w-[100%] h-fit">
+              <button
+                class="w-40 h-10 mt-4 bg-blue-400 text-white font-semibold text-center rounded-full">
+                Login
+              </button>
+              <a
+                class="text-center w-full font-semibold text-blue-400 p-2 mt-4"
+                href="/reg"
+                >Create Account</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>
