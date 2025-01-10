@@ -28,16 +28,6 @@
         overflow-x: hidden;
         height: 100%;
       }
-      .colG {
-        background-color: #ccffcc;
-        width: 100%;
-        color: #111;
-      }
-      .colR {
-        background-color: #faa0a0;
-        width: 100%;
-        color: #111;
-      }
     </style>
   </head>
   <body>
@@ -45,35 +35,36 @@
       <div
         class="w-full relative h-screen"
         id="page1">
-        <di
+        <div
           id="logo"
           class="w-full flex items-start p-4 h-20 absolute top-0">
           <img
             src="/images/logo.png"
             alt="Logo" />
-        </di>
+        </div>
         <form
-          action="/login"
+          action="/adminLogin"
           method="post"
-          class="w-full flex flex-col items-center justify-center min-h-full bg-[#fddede]"
+          class="min-w-full flex flex-col items-center justify-center min-h-full bg-[#fddede]"
           id="page1-container1">
           <h1 class="text-center text-3xl font-semibold mb-5">
-            Login as a User
+            Login as a Admin
           </h1>
           <div
-            class="bg-yellow-50 flex items-start p-2 justify-center flex-col sm:w-[30%] w-[90%] h-[50%]"
+            class="bg-yellow-50 flex items-start p-4 justify-center flex-col sm:w-[30%] w-[90%] h-[50%]"
             id="login-box">
-            <% if (messages.success && messages.success.length > 0) { %>
-            <div class="colG p-4 mb-4"><%= messages.success %></div>
-            <% } %> <% if (messages.error && messages.error.length > 0) { %>
-            <div class="colR p-4 mb-4"><%= messages.error %></div>
-            <% } %>
             <h3 class="text-lg my-2 font-semibold">Username</h3>
             <input
               class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
               type="text"
               name="username"
               placeholder="Username" />
+            <h3 class="text-lg my-2 font-semibold">Admin Id</h3>
+            <input
+              class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
+              type="text"
+              name="ID"
+              placeholder="Admin Id" />
             <h3 class="text-lg my-2 font-semibold">Password</h3>
             <input
               class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
@@ -81,7 +72,7 @@
               name="password"
               placeholder="Password" />
             <div
-              class="flex flex-col items-center p-2 gap-2 justify-between w-[100%] h-fit">
+              class="flex flex-col items-center p-2 gap-1 justify-center w-[100%] h-fit">
               <button
                 type="submit"
                 class="w-40 h-10 mt-4 bg-blue-400 text-white font-semibold text-center rounded-full">
@@ -89,13 +80,13 @@
               </button>
               <a
                 class="text-center w-full font-semibold text-blue-400 p-2 mt-1"
-                href="/reg"
-                >Create Account</a
+                href="/adminReg"
+                >Create Admin's Account</a
               >
               <a
                 class="text-center w-full font-semibold text-blue-400 p-2 mt-1"
-                href="/adminLogin"
-                >Login as a Admin</a
+                href="/login"
+                >Login as a User</a
               >
             </div>
           </div>

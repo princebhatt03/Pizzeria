@@ -5,7 +5,7 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
-    <title>Pizzeria</title>
+    <title>Pizzeria - Admin's Home</title>
     <link
       rel="shortcut icon"
       href="/images/favicon.png"
@@ -28,21 +28,6 @@
         overflow-x: hidden;
         height: 100%;
       }
-      .colG {
-        background-color: #ccffcc;
-        width: 100%;
-        color: #111;
-      }
-      .colR {
-        background-color: #faa0a0;
-        width: 100%;
-        color: #111;
-      }
-      .uppercase-fix {
-        cursor: pointer;
-        margin-bottom: 4px;
-        text-transform: uppercase !important;
-      }
     </style>
   </head>
   <body>
@@ -63,10 +48,15 @@
             class="w-1/2 h-full sm:flex justify-evenly items-center text-center nav2 hidden">
             <a
               class="text-lg font-semibold"
-              href="/"
+              href="/admin"
               >Home</a
             >
 
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >Profile</a
+            >
             <a
               class="text-lg font-semibold"
               href="#"
@@ -74,24 +64,16 @@
             >
             <a
               class="text-lg font-semibold"
-              href="/prof"
-              >Profile</a
+              href="/adminLogout"
+              >Logout</a
             >
-            <a
+            <!-- <a
               class="text-lg font-semibold"
               href="/cart"
               ><button
                 class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
                 <i class="ri-shopping-cart-2-fill"></i></button
-            ></a>
-            <a
-              class="text-lg font-semibold"
-              href="<%= username ? '/logout' : '/login' %>">
-              <button
-                class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
-                <%= username ? 'Logout' : 'Login' %>
-              </button>
-            </a>
+            ></a> -->
           </div>
           <div class="sm:hidden bars">
             <i
@@ -104,13 +86,17 @@
         </div>
         <div
           id="nav-menu"
-          class="w-[90%] z-20 transition-all duration-900 ease-in-out absolute left-[100%] rounded-lg bg-yellow-50 h-50 flex justify-center shadow-2xl items-center flex-col p-2 m-4 sm:hidden">
+          class="w-[90%] transition-all duration-900 ease-in-out absolute left-[100%] rounded-lg bg-yellow-50 h-50 flex justify-center shadow-2xl items-center flex-col p-2 m-4 sm:hidden">
           <a
             class="text-lg p-2 font-semibold"
-            href="/"
+            href="/admin"
             >Home</a
           >
-
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >Profile</a
+          >
           <a
             class="text-lg p-2 font-semibold"
             href="#"
@@ -118,59 +104,28 @@
           >
           <a
             class="text-lg p-2 font-semibold"
-            href="/prof"
-            >Profile</a
+            href="/adminLogout"
+            >Logout</a
           >
-          <a
+          <!-- <a
             class="text-lg p-2 font-semibold"
             href="/cart"
             ><button
               class="w-20 h-5 bg-orange-500 p-5 text-center flex justify-center items-center rounded-full">
               <i class="ri-shopping-cart-2-fill"></i></button
-          ></a>
-          <a
-            class="text-lg font-semibold"
-            href="<%= username ? '/logout' : '/login' %>">
-            <button
-              class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
-              <%= username ? 'Logout' : 'Login' %>
-            </button>
-          </a>
+          ></a> -->
         </div>
-        <% if (messages.success && messages.success.length > 0) { %>
-        <div class="colG p-4 mb-4"><%= messages.success %></div>
-        <% } %> <% if (messages.error && messages.error.length > 0) { %>
-        <div class="colR p-4 mb-4"><%= messages.error %></div>
-        <% } %>
-
         <div
           id="page1-container1"
           class="w-full sm:flex justify-between items-center h-[calc(100%-80px)] bg-[#fddede]">
           <div
             class="sm:w-1/2 sm:h-full h-1/2 p-5 flex items-center justify-center one">
             <div>
-              <h6 class="sm:text-xl text-lg mt-2 font-semibold">
-                <% if (username) { %> Are you Hungry?
-                <span
-                  onclick="location.href='/prof'"
-                  class="uppercase-fix"
-                  ><%= username %></span
-                >
-                <% } else { %> Are You Hungry?
-                <a
-                  href="/login"
-                  class="uppercase-fix"
-                  >Login and Order Now...</a
-                >
-                <% } %>
-              </h6>
-
-              <h1 class="sm:text-7xl text-4xl mt-2 font-semibold">
-                Don't Wait!
-              </h1>
+              <p class="sm:text-xl text-lg mt-2 font-semibold">Welcome Admin</p>
+              <h1 class="sm:text-7xl text-4xl mt-2 font-semibold">Get Start</h1>
               <button
                 class="w-40 h-10 mt-4 bg-orange-500 text-center rounded-full">
-                Order Now
+                Add Pizzas
               </button>
             </div>
           </div>
@@ -186,7 +141,9 @@
       <div
         class="w-full h-screen relative bg-yellow-50"
         id="page2">
-        <h2 class="text-center text-2xl font-semibold p-2">All Pizzas</h2>
+        <h2 class="text-center text-2xl font-semibold p-2">
+          All Pizzas Added by You
+        </h2>
         <div
           id="page2-container1"
           class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full col-span-4 p-8 min-h-full bg-white">
