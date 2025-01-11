@@ -79,18 +79,13 @@
             >
             <a
               class="text-lg font-semibold"
-              href="/cart"
-              ><button
-                class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
-                <i class="ri-shopping-cart-2-fill"></i></button
-            ></a>
+              href="/cart">
+              Cart
+            </a>
             <a
               class="text-lg font-semibold"
               href="<%= username ? '/logout' : '/login' %>">
-              <button
-                class="w-20 h-5 bg-orange-400 p-5 text-center flex justify-center items-center rounded-full">
-                <%= username ? 'Logout' : 'Login' %>
-              </button>
+              <%= username ? 'Logout' : 'Login' %>
             </a>
           </div>
           <div class="sm:hidden bars">

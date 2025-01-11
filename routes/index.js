@@ -47,18 +47,18 @@ router.get('/cart', function (req, res, next) {
 router.get('/prof', isLoggedIn, (req, res) => {
   const success = req.flash('success');
   const error = req.flash('error');
-  const { username, email } = req.session.user;
+  const { username } = req.session.user;
 
   res.render('profile', {
     success,
     error,
-    user: { username, email },
+    user: username,
   });
 });
 
 router.post('/prof', isLoggedIn, async (req, res) => {
   try {
-    const { username, email, currentPassword, newPassword, confirmPassword } =
+    const { username, currentPassword, newPassword, confirmPassword } =
       req.body;
 
     const userId = req.session.user.id;
@@ -91,7 +91,6 @@ router.post('/prof', isLoggedIn, async (req, res) => {
     }
 
     user.username = username;
-    user.email = email;
     await user.save();
 
     req.session.user.username = username;
@@ -121,6 +120,80 @@ router.get('/adminLogin', function (req, res, next) {
   const success = req.flash('success');
   const error = req.flash('error');
   res.render('auth/adminLogin', { success, error });
+});
+
+router.get('/adminProf', isAdminLoggedIn, (req, res) => {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  const { username, ID } = req.session.admin; // Get admin details from session
+  res.render('adminProfile', { success, error, admin: { username, ID } }); // Pass admin details to the view
+});
+
+router.post('/adminProf', isAdminLoggedIn, async (req, res) => {
+  try {
+    const { username, ID, currentPassword, newPassword, confirmPassword } =
+      req.body;
+
+    const adminId = req.session.admin.id; // Retrieve admin ID from session
+    const admin = await adminReg.findById(adminId);
+
+    if (!admin) {
+      req.flash('error', 'Admin not found.');
+      return res.redirect('/admin');
+    }
+
+    // Validate current password if provided
+    if (currentPassword && admin.password !== currentPassword) {
+      req.flash('error', 'Current password is incorrect.');
+      return res.redirect('/admin');
+    }
+
+    // Check if username is already taken by another admin
+    const existingUsername = await adminReg.findOne({
+      username,
+      _id: { $ne: adminId }, // Exclude current admin
+    });
+    if (existingUsername) {
+      req.flash('error', 'Username already exists. Please choose another one.');
+      return res.redirect('/admin');
+    }
+
+    // Check if ID is already taken by another admin
+    const existingID = await adminReg.findOne({
+      ID,
+      _id: { $ne: adminId }, // Exclude current admin
+    });
+    if (existingID) {
+      req.flash('error', 'Admin ID already exists. Please choose another one.');
+      return res.redirect('/admin');
+    }
+
+    // Validate new password and confirm password
+    if (newPassword || confirmPassword) {
+      if (newPassword !== confirmPassword) {
+        req.flash('error', 'New password and confirm password do not match.');
+        return res.redirect('/admin');
+      }
+      admin.password = newPassword; // Update password
+    }
+
+    // Update admin details
+    admin.username = username;
+    admin.ID = ID;
+    await admin.save();
+
+    // Update session data
+    req.session.admin.username = username;
+    req.flash('success', 'Profile updated successfully!');
+    res.redirect('/admin');
+  } catch (error) {
+    console.error('Error updating admin profile:', error.message);
+    req.flash(
+      'error',
+      'An error occurred while updating the profile. Please try again.'
+    );
+    res.redirect('/admin');
+  }
 });
 
 router.get('/adminReg', function (req, res, next) {

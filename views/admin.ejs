@@ -38,6 +38,9 @@
         width: 100%;
         color: #111;
       }
+      .upp {
+        text-transform: uppercase;
+      }
     </style>
   </head>
   <body>
@@ -64,7 +67,7 @@
 
             <a
               class="text-lg font-semibold"
-              href="#"
+              href="/adminProf"
               >Profile</a
             >
             <a
@@ -104,7 +107,7 @@
           >
           <a
             class="text-lg p-2 font-semibold"
-            href="#"
+            href="/adminProf"
             >Profile</a
           >
           <a
@@ -136,7 +139,15 @@
           <div
             class="sm:w-1/2 sm:h-full h-1/2 p-5 flex items-center justify-center one">
             <div>
-              <p class="sm:text-xl text-lg mt-2 font-semibold">Welcome Admin</p>
+              <p class="sm:text-xl text-lg mt-2 font-semibold">
+                Welcome
+                <a
+                  href="/adminProf"
+                  class="upp"
+                  ><%= username %></a
+                >
+              </p>
+
               <h1 class="sm:text-7xl text-4xl mt-2 font-semibold">Get Start</h1>
               <button
                 class="w-40 h-10 mt-4 bg-orange-500 text-center rounded-full">

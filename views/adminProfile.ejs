@@ -11,7 +11,7 @@
   <body>
     <h1>Edit Profile</h1>
     <form
-      action="/prof"
+      action="/adminProf"
       method="POST"
       class="space-y-4">
       <div>
@@ -19,6 +19,14 @@
         <input
           type="text"
           name="username"
+          required
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label class="block font-medium mb-1">Change Admin ID:</label>
+        <input
+          type="text"
+          name="ID"
           required
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
