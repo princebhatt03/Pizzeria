@@ -28,6 +28,16 @@
         overflow-x: hidden;
         height: 100%;
       }
+      .colG {
+        background-color: #ccffcc;
+        width: 100%;
+        color: #111;
+      }
+      .colR {
+        background-color: #faa0a0;
+        width: 100%;
+        color: #111;
+      }
     </style>
   </head>
   <body>
@@ -53,6 +63,11 @@
           <div
             class="bg-yellow-50 flex items-start p-4 justify-center flex-col sm:w-[30%] w-[90%] h-[50%]"
             id="login-box">
+            <% if (messages.success && messages.success.length > 0) { %>
+            <div class="colG p-4 mb-4"><%= messages.success %></div>
+            <% } %> <% if (messages.error && messages.error.length > 0) { %>
+            <div class="colR p-4 mb-4"><%= messages.error %></div>
+            <% } %>
             <h3 class="text-lg my-2 font-semibold">Username</h3>
             <input
               class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"

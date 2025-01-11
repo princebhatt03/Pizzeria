@@ -110,17 +110,23 @@ router.get('/login', function (req, res, next) {
 });
 
 router.get('/reg', function (req, res, next) {
-  res.render('auth/register');
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/register', { success, error });
 });
 
 router.get('/admin', isAdminLoggedIn, adminHomeController().index);
 
 router.get('/adminLogin', function (req, res, next) {
-  res.render('auth/adminLogin');
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/adminLogin', { success, error });
 });
 
 router.get('/adminReg', function (req, res, next) {
-  res.render('auth/adminReg');
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/adminReg', { success, error });
 });
 
 // Post Routes...
@@ -139,8 +145,8 @@ router.post('/reg', async function (req, res, next) {
       password: req.body.password,
     });
     await registerUser.save();
-    req.flash('success', 'User registered successfully!');
-    res.status(201).redirect('/');
+    req.flash('success', 'User registered successfully, Now Login to continue');
+    res.status(201).redirect('/login');
   } catch (error) {
     req.flash('error', error.message);
     res.status(400).send(error.message);
@@ -208,6 +214,8 @@ router.post('/adminLogin', async (req, res) => {
 
 // User Logout
 router.get('/logout', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
   req.session.destroy(err => {
     if (err) {
       return next(err);
@@ -219,12 +227,13 @@ router.get('/logout', function (req, res, next) {
 
 // Admin Logout
 router.get('/adminLogout', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
   req.session.destroy(err => {
     if (err) {
       return next(err);
     }
     res.clearCookie('connect.sid');
-    req.flash('success', 'Admin logged out successfully');
     res.redirect('/adminLogin');
   });
 });
