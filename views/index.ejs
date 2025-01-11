@@ -43,6 +43,26 @@
         margin-bottom: 4px;
         text-transform: uppercase !important;
       }
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 14px;
+        z-index: 1000;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .notification.success {
+        background-color: #4caf50; /* Green */
+      }
+
+      .notification.error {
+        background-color: #f44336; /* Red */
+      }
     </style>
   </head>
   <body>
@@ -78,9 +98,14 @@
               >Profile</a
             >
             <a
-              class="text-lg font-semibold"
+              class="text-lg px-4 py-2 flex items-center bg-orange-500 rounded-full font-semibold"
               href="/cart">
-              Cart
+              <span
+                id="cartCounter"
+                class="text-white font-bold pr-2"
+                ><%= session.cart ? session.cart.totalQty : '' %></span
+              >
+              <i class="text-white ri-shopping-cart-line"></i>
             </a>
             <a
               class="text-lg font-semibold"
@@ -193,7 +218,8 @@
             <div class="flex mt-4 justify-between items-center gap-4">
               <p class="text-lg font-semibold">₹<%= pizza.price %></p>
               <button
-                onclick="alert('ADDED TO CART')"
+                data-pizza="<%= JSON.stringify(pizza)%>"
+                id="AddToCart"
                 class="w-20 h-10 bg-gray-100 font-semibold border-red-500 rounded-full">
                 <i class="ri-add-line"></i> Add
               </button>
@@ -203,6 +229,9 @@
         </div>
       </div>
     </div>
-    <script src="/javascripts/script.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      type="module"
+      src="/javascripts/script.js"></script>
   </body>
 </html>

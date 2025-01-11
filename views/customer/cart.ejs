@@ -90,7 +90,45 @@
             >Logout</a
           >
         </div>
-        <!-- <div
+        <% if(session.cart){ %>
+        <div
+          class="w-full flex items-center justify-center flex-col min-h-[calc(100%-80px)] bg-[#fddede]"
+          id="page1-container2">
+          <h1 class="text-3xl mt-3 font-semibold text-left">Order Summary</h1>
+
+          <% for(let pizza of Object.values(session.cart.items)) {%>
+
+          <div
+            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-t-2 border-gray-500 justify-between">
+            <div class="sm:flex block flex-row items-center justify-center">
+              <img
+                class="w-32 mt-2 h-32 sm:ml-0 ml-5"
+                src="/images/<%= pizza.item.image%>"
+                alt="Pizza" />
+              <div class="ml-5">
+                <h2 class="text-center text-lg font-semibold">
+                  <%= pizza.item.name%>
+                </h2>
+                <p class="text-gray-500 text-center font-semibold">
+                  <%= pizza.item.size%>
+                </p>
+              </div>
+            </div>
+            <h4 class="text-center text-lg font-semibold">
+              <%= pizza.qty%>Pcs
+            </h4>
+            <p class="text-center text-lg font-semibold">
+              ₹ <%= pizza.item.price * pizza.qty%>
+            </p>
+          </div>
+          <% } %>
+          <h1 class="sm:text-xl text-lg font-semibold">
+            Total Amount:
+            <span class="text-orange-500">₹<%= session.cart.totalPrice %></span>
+          </h1>
+        </div>
+        <%} else{ %>
+        <div
           id="page1-container1"
           class="w-full h-[calc(100%-80px)] flex items-center flex-col justify-center bg-[#fddede]">
           <div class="w-[90%] flex flex-col items-center justify-center h-full">
@@ -105,85 +143,8 @@
               Go Back
             </button>
           </div>
-        </div> -->
-        <div
-          class="w-full flex items-center justify-center flex-col min-h-[calc(100%-80px)] bg-[#fddede]"
-          id="page1-container2">
-          <h1 class="text-3xl mt-3 font-semibold text-left">Order Summary</h1>
-          <div
-            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-t-2 border-gray-500 justify-between">
-            <div class="sm:flex block flex-row items-center justify-center">
-              <img
-                class="w-32 mt-2 h-32 sm:ml-0 ml-5"
-                src="/images/pizza.png"
-                alt="Pizza" />
-              <div class="ml-5">
-                <h2 class="text-center text-lg font-semibold">Marinara</h2>
-                <p class="text-gray-500 text-center font-semibold">Medium</p>
-              </div>
-            </div>
-            <h4 class="text-center text-lg font-semibold">1 Pcs</h4>
-            <p class="text-center text-lg font-semibold">₹300</p>
-          </div>
-          <div
-            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-gray-500 justify-between">
-            <div class="sm:flex block flex-row items-center justify-center">
-              <img
-                class="w-32 mt-2 h-32 sm:ml-0 ml-5"
-                src="/images/pizza.png"
-                alt="Pizza" />
-              <div class="ml-5">
-                <h2 class="text-center text-lg font-semibold">Marinara</h2>
-                <p class="text-gray-500 text-center font-semibold">Medium</p>
-              </div>
-            </div>
-            <h4 class="text-center text-lg font-semibold">1 Pcs</h4>
-            <p class="text-center text-lg font-semibold">₹300</p>
-          </div>
-          <div
-            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-b-2 border-gray-500 justify-between">
-            <div class="sm:flex block flex-row items-center justify-center">
-              <img
-                class="w-32 mt-2 h-32 sm:ml-0 ml-5"
-                src="/images/pizza.png"
-                alt="Pizza" />
-              <div class="ml-5">
-                <h2 class="text-center text-lg font-semibold">Marinara</h2>
-                <p class="text-gray-500 text-center font-semibold">Medium</p>
-              </div>
-            </div>
-            <h4 class="text-center text-lg font-semibold">1 Pcs</h4>
-            <p class="text-center text-lg font-semibold">₹300</p>
-          </div>
-          <div
-            class="flex flex-col m-6 min-w-[50%] mt-4 sm:items-end items-center justify-end">
-            <h1 class="sm:text-xl text-lg font-semibold">
-              Total Amount: <span class="text-orange-500">₹300</span>
-            </h1>
-            <input
-              class="mt-6 sm:w-[50%] w-[100%] h-10 border-2 p-2 border-gray-300"
-              type="text"
-              placeholder="Address" />
-            <button
-              class="w-40 h-10 mt-8 bg-orange-500 text-center rounded-full">
-              Order Now
-            </button>
-          </div>
-          <div
-            class="flex flex-col m-6 min-w-[50%] mt-4 sm:items-end items-center justify-end">
-            <h1 class="sm:text-xl text-lg font-semibold">
-              Total Amount: <span class="text-orange-500">₹300</span>
-            </h1>
-            <input
-              class="mt-6 sm:w-[50%] w-[100%] h-10 border-2 p-2 border-gray-300"
-              type="text"
-              placeholder="Phone Number" />
-            <button
-              class="w-40 h-10 mt-8 bg-orange-500 text-center rounded-full">
-              Login to Continue
-            </button>
-          </div>
         </div>
+        <% } %>
       </div>
     </div>
     <script src="/javascripts/script.js"></script>

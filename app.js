@@ -5,9 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const flash = require('connect-flash');
-const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./models/users');
+const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session);
 
 var app = express();
 
@@ -22,15 +23,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up session before flash
+const store = new MongoStore({
+  uri: process.env.DATABASE_CONNECTION_STRING, // Use the same connection string as the main database
+  collection: 'sessions',
+});
+
+// Handle MongoStore errors
+store.on('error', function (error) {
+  console.error('Session store error:', error);
+});
+
+// Set up session middleware
 app.use(
   session({
-    secret: 'your_secret_key', // Change this to a more secure key in production
+    secret: 'SECRET_PRINCE',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 3600000 }, // Set secure: true if you're using HTTPS
+    store: store,
+    cookie: { secure: false, maxAge: 3600000 },
   })
 );
+
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 // Flash middleware
 app.use(flash());
