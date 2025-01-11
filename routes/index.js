@@ -7,7 +7,6 @@ const adminHomeController = require('../controllers/adminHome.controller');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-// Session middleware
 router.use(
   session({
     secret: 'SECRET',
@@ -17,10 +16,8 @@ router.use(
   })
 );
 
-// Flash middleware
 router.use(flash());
 
-// Middleware to check if user is logged in
 function isLoggedIn(req, res, next) {
   if (req.session.user) {
     return next();
@@ -28,7 +25,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
-// Middleware to check if admin is logged in
 function isAdminLoggedIn(req, res, next) {
   if (req.session.admin) {
     return next();
@@ -36,7 +32,7 @@ function isAdminLoggedIn(req, res, next) {
   res.redirect('/adminLogin');
 }
 
-// Routes
+// User's Get Routes
 
 router.get('/', homeController().index);
 
@@ -54,6 +50,82 @@ router.get('/prof', isLoggedIn, (req, res) => {
     error,
     user: username,
   });
+});
+
+router.get('/login', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/login', { success, error });
+});
+
+router.get('/reg', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/register', { success, error });
+});
+
+// Admin's Get Routes
+
+router.get('/admin', isAdminLoggedIn, adminHomeController().index);
+
+router.get('/adminLogin', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/adminLogin', { success, error });
+});
+
+router.get('/adminReg', function (req, res, next) {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('auth/adminReg', { success, error });
+});
+
+router.get('/adminProf', isAdminLoggedIn, (req, res) => {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  const { username, ID } = req.session.admin;
+  res.render('adminProfile', { success, error, admin: { username, ID } });
+});
+
+// User's Post Routes
+
+router.post('/reg', async function (req, res, next) {
+  try {
+    const existingUser = await userReg.findOne({
+      username: req.body.username,
+    });
+    if (existingUser) {
+      return res.status(400).send('Username Already Exist');
+    }
+    const registerUser = new userReg({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    await registerUser.save();
+    req.flash('success', 'User registered successful, Now Login to continue');
+    res.status(201).redirect('/login');
+  } catch (error) {
+    req.flash('error', error.message);
+    res.status(400).send(error.message);
+  }
+});
+
+router.post('/login', async function (req, res) {
+  try {
+    const { username, password } = req.body;
+    const user = await userReg.findOne({ username: username });
+    if (!user || user.password !== password) {
+      req.flash('error', 'Username or Password is Incorrect');
+      return res.redirect('/login');
+    }
+    req.session.user = { id: user._id, username: user.username };
+    req.flash('success', 'Login successful!');
+    res.status(200).redirect('/');
+  } catch (error) {
+    req.flash('error', error.message);
+    res.redirect('/login');
+  }
 });
 
 router.post('/prof', isLoggedIn, async (req, res) => {
@@ -102,31 +174,51 @@ router.post('/prof', isLoggedIn, async (req, res) => {
   }
 });
 
-router.get('/login', function (req, res, next) {
-  const success = req.flash('success');
-  const error = req.flash('error');
-  res.render('auth/login', { success, error });
+// Admin's Post Routes
+
+router.post('/adminReg', async function (req, res) {
+  try {
+    const existingAdmin = await adminReg.findOne({
+      username: req.body.username,
+    });
+    if (existingAdmin) {
+      req.flash('error', 'Admin Already Exists');
+      return res.status(400).send('Admin Already Exists');
+    }
+
+    const registerAdmin = new adminReg({
+      username: req.body.username,
+      ID: req.body.ID,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    await registerAdmin.save();
+    req.flash(
+      'success',
+      'Admin registered successfully, Now login to continue'
+    );
+    res.status(200).redirect('/adminLogin');
+  } catch (error) {
+    req.flash('error', error.message);
+    res.status(400).send(error.message);
+  }
 });
 
-router.get('/reg', function (req, res, next) {
-  const success = req.flash('success');
-  const error = req.flash('error');
-  res.render('auth/register', { success, error });
-});
-
-router.get('/admin', isAdminLoggedIn, adminHomeController().index);
-
-router.get('/adminLogin', function (req, res, next) {
-  const success = req.flash('success');
-  const error = req.flash('error');
-  res.render('auth/adminLogin', { success, error });
-});
-
-router.get('/adminProf', isAdminLoggedIn, (req, res) => {
-  const success = req.flash('success');
-  const error = req.flash('error');
-  const { username, ID } = req.session.admin;
-  res.render('adminProfile', { success, error, admin: { username, ID } });
+router.post('/adminLogin', async (req, res) => {
+  try {
+    const { username, ID, password } = req.body;
+    const admin = await adminReg.findOne({ username, ID });
+    if (!admin || admin.password !== password) {
+      req.flash('error', 'Username, Password, or ID Incorrect');
+      return res.redirect('/adminLogin');
+    }
+    req.session.admin = { id: admin._id, username: admin.username };
+    req.flash('success', 'Admin login successful!');
+    res.status(201).redirect('/admin');
+  } catch (error) {
+    req.flash('error', error.message);
+    res.redirect('/adminLogin');
+  }
 });
 
 router.post('/adminProf', isAdminLoggedIn, async (req, res) => {
@@ -181,98 +273,6 @@ router.post('/adminProf', isAdminLoggedIn, async (req, res) => {
       'An error occurred while updating the profile. Please try again.'
     );
     res.redirect('/admin');
-  }
-});
-
-router.get('/adminReg', function (req, res, next) {
-  const success = req.flash('success');
-  const error = req.flash('error');
-  res.render('auth/adminReg', { success, error });
-});
-
-// Post Routes...
-
-router.post('/reg', async function (req, res, next) {
-  try {
-    const existingUser = await userReg.findOne({
-      username: req.body.username,
-    });
-    if (existingUser) {
-      return res.status(400).send('Username Already Exist');
-    }
-    const registerUser = new userReg({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    await registerUser.save();
-    req.flash('success', 'User registered successful, Now Login to continue');
-    res.status(201).redirect('/login');
-  } catch (error) {
-    req.flash('error', error.message);
-    res.status(400).send(error.message);
-  }
-});
-
-router.post('/login', async function (req, res) {
-  try {
-    const { username, password } = req.body;
-    const user = await userReg.findOne({ username: username });
-    if (!user || user.password !== password) {
-      req.flash('error', 'Username or Password is Incorrect');
-      return res.redirect('/login');
-    }
-    req.session.user = { id: user._id, username: user.username };
-    req.flash('success', 'Login successful!');
-    res.status(200).redirect('/');
-  } catch (error) {
-    req.flash('error', error.message);
-    res.redirect('/login');
-  }
-});
-
-router.post('/adminReg', async function (req, res) {
-  try {
-    const existingAdmin = await adminReg.findOne({
-      username: req.body.username,
-    });
-    if (existingAdmin) {
-      req.flash('error', 'Admin Already Exists');
-      return res.status(400).send('Admin Already Exists');
-    }
-
-    const registerAdmin = new adminReg({
-      username: req.body.username,
-      ID: req.body.ID,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    await registerAdmin.save();
-    req.flash(
-      'success',
-      'Admin registered successfully, Now login to continue'
-    );
-    res.status(200).redirect('/adminLogin');
-  } catch (error) {
-    req.flash('error', error.message);
-    res.status(400).send(error.message);
-  }
-});
-
-router.post('/adminLogin', async (req, res) => {
-  try {
-    const { username, ID, password } = req.body;
-    const admin = await adminReg.findOne({ username, ID });
-    if (!admin || admin.password !== password) {
-      req.flash('error', 'Username, Password, or ID Incorrect');
-      return res.redirect('/adminLogin');
-    }
-    req.session.admin = { id: admin._id, username: admin.username };
-    req.flash('success', 'Admin login successful!');
-    res.status(201).redirect('/admin');
-  } catch (error) {
-    req.flash('error', error.message);
-    res.redirect('/adminLogin');
   }
 });
 
