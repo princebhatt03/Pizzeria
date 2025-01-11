@@ -63,6 +63,9 @@
       .notification.error {
         background-color: #f44336; /* Red */
       }
+      .mrr {
+        margin-right: 10px;
+      }
     </style>
   </head>
   <body>
@@ -86,7 +89,6 @@
               href="/"
               >Home</a
             >
-
             <a
               class="text-lg font-semibold"
               href="#"
@@ -98,21 +100,21 @@
               >Profile</a
             >
             <a
-              class="text-lg px-4 py-2 flex items-center bg-orange-500 rounded-full font-semibold"
-              href="/cart">
-              <span
-                id="cartCounter"
-                class="text-white font-bold pr-2"
-                ><%= session.cart ? session.cart.totalQty : '' %></span
-              >
-              <i class="text-white ri-shopping-cart-line"></i>
-            </a>
-            <a
               class="text-lg font-semibold"
               href="<%= username ? '/logout' : '/login' %>">
               <%= username ? 'Logout' : 'Login' %>
             </a>
           </div>
+          <a
+            class="text-lg px-4 py-2 mrr flex items-center bg-orange-500 rounded-full font-semibold"
+            href="/cart">
+            <span
+              id="cartCounter"
+              class="text-white font-bold pr-2"
+              ><%= session.cart ? session.cart.totalQty : '' %></span
+            >
+            <i class="text-white ri-shopping-cart-line"></i>
+          </a>
           <div class="sm:hidden bars">
             <i
               id="menu1"
@@ -130,7 +132,6 @@
             href="/"
             >Home</a
           >
-
           <a
             class="text-lg p-2 font-semibold"
             href="#"
@@ -140,11 +141,6 @@
             class="text-lg p-2 font-semibold"
             href="/prof"
             >Profile</a
-          >
-          <a
-            class="text-lg p-2 font-semibold"
-            href="/cart"
-            >Cart</a
           >
           <a
             class="text-lg font-semibold"
