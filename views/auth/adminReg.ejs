@@ -42,6 +42,11 @@
             src="/images/logo.png"
             alt="Logo" />
         </div>
+        <% if (messages.success && messages.success.length > 0) { %>
+        <div class="colG p-4 mb-4"><%= messages.success %></div>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <div class="colR p-4 mb-4"><%= messages.error %></div>
+        <% } %>
         <div
           class="w-full flex flex-col items-center justify-center min-h-full bg-[#fddede]"
           id="page1-container1">

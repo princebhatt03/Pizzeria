@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-//
+// Function for Updating the Status...
 
 document.addEventListener('DOMContentLoaded', () => {
   let statuses = document.querySelectorAll('.status_line');
@@ -90,5 +90,3 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStatus(order);
   }
 });
-
-// Socket

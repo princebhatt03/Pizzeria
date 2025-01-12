@@ -10,24 +10,19 @@ const cartController = require('../controllers/cart.controller');
 const orderController = require('../controllers/order.controller');
 const adminOrdersController = require('../controllers/adminOrders.controller');
 const statusController = require('../controllers/status.controller');
-// const PORT = process.env.PORT || 3000;
-// const io = require('socket.io')(PORT);
-// io.on('connnection', () => {
 
-// });
+// Middleware setup...
 
-// Middleware setup
 router.use(
   session({
     secret: 'SECRET',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 3600000 }, // 1 hour
+    cookie: { secure: false, maxAge: 3600000 },
   })
 );
 router.use(flash());
 
-// Authentication middlewares
 function isLoggedIn(req, res, next) {
   if (req.session?.user?._id) {
     return next();
@@ -44,8 +39,10 @@ function isAdminLoggedIn(req, res, next) {
   res.redirect('/adminLogin');
 }
 
-// User Routes
+// User's Get Routes...
+
 router.get('/', homeController().index);
+
 router.get('/cart', cartController().index);
 
 router.get('/prof', isLoggedIn, (req, res) => {
@@ -70,7 +67,14 @@ router.get('/reg', (req, res) => {
   });
 });
 
-// Admin Routes
+router.get('/orders', isLoggedIn, orderController().index);
+
+router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
+
+router.get('/singleOrder/:id', isLoggedIn, orderController().show);
+
+// Admin's Get Routes...
+
 router.get('/admin', isAdminLoggedIn, adminHomeController().index);
 
 router.get('/adminLogin', (req, res) => {
@@ -91,11 +95,11 @@ router.get('/adminProf', isAdminLoggedIn, (req, res) => {
   const success = req.flash('success');
   const error = req.flash('error');
   const { username, ID } = req.session.admin;
-
   res.render('adminProfile', { success, error, admin: { username, ID } });
 });
 
-// User Post Routes
+// User's Post Routes...
+
 router.post('/reg', async (req, res) => {
   try {
     const existingUser = await userReg.findOne({ username: req.body.username });
@@ -103,7 +107,6 @@ router.post('/reg', async (req, res) => {
       req.flash('error', 'Username already exists');
       return res.status(400).redirect('/reg');
     }
-
     const registerUser = new userReg(req.body);
     await registerUser.save();
     req.flash('success', 'User registered successfully. Please log in.');
@@ -122,7 +125,6 @@ router.post('/login', async (req, res) => {
       req.flash('error', 'Invalid username or password');
       return res.redirect('/login');
     }
-
     req.session.user = { _id: user._id, username: user.username };
     req.flash('success', 'Login successful!');
     res.redirect('/');
@@ -160,17 +162,13 @@ router.post('/prof', isLoggedIn, async (req, res) => {
   }
 });
 
-router.get('/orders', isLoggedIn, orderController().index);
-
 router.post('/orders', isLoggedIn, orderController().store);
 
 router.post('/updateCart', cartController().update);
 
-router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
-
-router.get('/singleOrder/:id', isLoggedIn, orderController().show);
-
 router.post('/status', isAdminLoggedIn, statusController().update);
+
+// Admin's Post Routes...
 
 router.post('/adminReg', async (req, res) => {
   try {
