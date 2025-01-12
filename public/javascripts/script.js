@@ -54,18 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Change Order Status
+//
 
 document.addEventListener('DOMContentLoaded', () => {
   let statuses = document.querySelectorAll('.status_line');
   let hiddenInput = document.querySelector('#hiddenInput');
   let order = hiddenInput ? JSON.parse(hiddenInput.value) : null;
-  let time = document.createElement('small');
 
   function updateStatus(order) {
     let stepCompleted = true;
 
-    statuses.forEach(status => {
+    statuses.forEach((status, index) => {
       let dataProp = status.dataset.status;
 
       if (stepCompleted) {
@@ -74,13 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (dataProp === order.status) {
         stepCompleted = false;
+        let time = document.createElement('small');
         time.innerText = moment(order.updatedAt).format('hh:mm A');
         status.appendChild(time);
-        if (status.nextElementSibling) {
-          status.nextElementSibling.classList.add('current');
-        }
+        status.classList.add('current');
       }
     });
+    if (
+      !Array.from(statuses).some(status => status.classList.contains('current'))
+    ) {
+      statuses[0].classList.add('current');
+    }
   }
 
   if (order) {
@@ -89,4 +92,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Socket
-

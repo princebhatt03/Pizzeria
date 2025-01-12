@@ -7,6 +7,10 @@
       content="width=device-width, initial-scale=1.0" />
     <title>Single Order</title>
     <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
+    <link
       rel="stylesheet"
       href="/stylesheets/style.css" />
   </head>
@@ -22,27 +26,25 @@
       width: 100%;
       height: 100%;
     }
-    .status_box ul li.step-completed span::after {
-      background: gray;
-    }
     .status_box ul li.step-completed span {
       color: gray;
     }
-    .step-completed {
-      color: gray;
+
+    .status_box ul li.step-completed span::after {
+      background: gray;
     }
-    .current {
-      color: orangered;
-    }
+
     .status_box ul li.current span {
       color: orangered;
     }
+
     .status_box ul li.current span::after {
-      color: orangered;
+      background: orangered;
     }
+
     small {
       color: blue;
-      font-weight: bold !important;
+      font-weight: bold;
     }
   </style>
   <body>
