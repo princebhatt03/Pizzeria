@@ -8,6 +8,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const cartController = require('../controllers/cart.controller');
 const orderController = require('../controllers/order.controller');
+const adminOrdersController = require('../controllers/adminOrders.controller');
 
 // Middleware setup
 router.use(
@@ -158,6 +159,8 @@ router.get('/orders', isLoggedIn, orderController().index);
 router.post('/orders', isLoggedIn, orderController().store);
 
 router.post('/updateCart', cartController().update);
+
+router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
 
 router.post('/adminReg', async (req, res) => {
   try {

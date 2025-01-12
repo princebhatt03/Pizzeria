@@ -1,12 +1,11 @@
 let cartCounter = document.querySelector('#cartCounter');
+
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const menu1 = document.getElementById('menu1');
   const menu2 = document.getElementById('menu2');
   const navMenu = document.getElementById('nav-menu');
   const cartBtns = document.querySelectorAll('#AddToCart');
 
-  // Menu toggle functionality
   menu1?.addEventListener('click', () => {
     menu1.classList.add('hidden');
     menu2.classList.remove('hidden');
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navMenu.style.left = '100%';
   });
 
-  // Function to update the cart
   function updateCart(pizza) {
     axios
       .post('/updateCart', pizza)
@@ -33,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showNotification('Failed to add item to cart.', 'error');
       });
   }
-
-  // Attach event listeners to all cart buttons
   cartBtns.forEach(btn => {
     btn.addEventListener('click', e => {
       try {
@@ -46,8 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-  // Function to display notifications
   function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -56,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(notification);
     setTimeout(() => {
       notification.remove();
-    }, 3000); // Auto-remove after 3 seconds
+    }, 3000);
   }
 });
+

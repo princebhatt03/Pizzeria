@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Admin Order Page</title>
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        overflow-y: auto;
+        width: 100%;
+        height: 100%;
+      }
+      .colG {
+        background-color: #ccffcc;
+        width: 100%;
+        color: #111;
+      }
+      .colR {
+        background-color: #faa0a0;
+        width: 100%;
+        color: #111;
+      }
+      .uppercase-fix {
+        cursor: pointer;
+        margin-bottom: 4px;
+        text-transform: uppercase !important;
+      }
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 14px;
+        z-index: 1000;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .notification.success {
+        background-color: #4caf50;
+      }
+
+      .notification.error {
+        background-color: #f44336;
+      }
+      .mrr {
+        margin-right: 10px;
+      }
+      .btn {
+        width: auto;
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div id="main">
+      <div id="page1">
+        <% if (messages.success && messages.success.length > 0) { %>
+        <div class="colG p-4"><%= messages.success %></div>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <div class="colR p-4"><%= messages.error %></div>
+        <% } %>
+        <div
+          class="flex flex-col items-start justify-center"
+          id="page1-container1">
+          <div
+            class="sm:w-[100%] p-10 relative overflow-scroll gap-4 w-auto sm:h-auto h-[100%]">
+            <h2 class="text-black p-4 font-semibold text-xl">All Orders</h2>
+            <table class="lefttt w-full table-auto bg-white">
+              <thead class="overflow-scroll">
+                <tr>
+                  <th class="px-4 py-2 text-left border">Orders</th>
+                  <th class="px-4 py-2 text-left border">Item</th>
+                  <th class="px-4 py-2 text-left border">Address</th>
+                  <th class="px-4 py-2 text-left border">status</th>
+                  <th class="px-4 py-2 text-left border">Placed at</th>
+                  <th class="px-4 py-2 text-left border">Payment Status</th>
+                </tr>
+              </thead>
+              <tbody
+                class="p-5"
+                id="orderTableBody"></tbody>
+            </table>
+          </div>
+          <button
+            onclick="location.href='/admin'"
+            class="bg-orange-400 font-semibold p-2 btn rounded-full">
+            Go Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/admin.js"></script>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

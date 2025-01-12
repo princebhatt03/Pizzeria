@@ -25,7 +25,10 @@ function orderController() {
         })
         .catch(err => {
           console.error(err);
-          req.flash('error', 'Failed to place order. Please try again.');
+          req.flash(
+            'error',
+            'You can Only make 1 Order at a time, after your first order you can make another...'
+          );
           return res.redirect('/cart');
         });
     },
