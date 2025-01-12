@@ -12,7 +12,7 @@ function orderController() {
 
       const order = new Order({
         items: req.session.cart.items,
-        customerId: req.session.user._id, // Use logged-in user ID
+        customerId: req.session.user._id,
         phone,
         address,
       });
@@ -34,7 +34,7 @@ function orderController() {
       try {
         const orders = await Order.find({
           customerId: req.session.user._id,
-        }).sort('-createdAt'); // Fetch orders for logged-in user
+        }).sort('-createdAt');
         res.render('orders', {
           orders,
           success: req.flash('success'),

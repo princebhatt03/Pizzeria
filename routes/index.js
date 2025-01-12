@@ -153,15 +153,12 @@ router.post('/prof', isLoggedIn, async (req, res) => {
   }
 });
 
-// Fetch orders for logged-in user
 router.get('/orders', isLoggedIn, orderController().index);
 
-// Save a new order
 router.post('/orders', isLoggedIn, orderController().store);
 
 router.post('/updateCart', cartController().update);
 
-// Admin Post Routes
 router.post('/adminReg', async (req, res) => {
   try {
     const existingAdmin = await adminReg.findOne({
