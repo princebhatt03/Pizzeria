@@ -6,6 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title>orders</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
   </head>
   <link
     rel="stylesheet"
@@ -153,8 +157,8 @@
                 </tr>
               </thead>
               <tbody>
-                <% if (orders && orders.length > 0) { %> 
-                 <% orders.forEach((order) => { %>
+                <% if (orders && orders.length > 0) { %> <%
+                orders.forEach((order) => { %>
                 <tr>
                   <td class="border px-4 py-2">
                     <a
@@ -168,8 +172,7 @@
                     <%= new Date(order.createdAt).toLocaleString() %>
                   </td>
                 </tr>
-                <% }) %> 
-                <% } else { %>
+                <% }) %> <% } else { %>
                 <tr>
                   <td
                     class="border px-4 py-2 text-center"

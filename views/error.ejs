@@ -1,2 +1,37 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Error Page</title>
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css" />
+  </head>
+  <body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="text-center">
+      <div class="max-w-md mx-auto">
+        <h1 class="text-9xl font-extrabold text-red-600">404</h1>
+        <p class="text-xl mt-4 text-gray-700">
+          Oops! The page you're looking for doesn't exist.
+        </p>
+        <p class="mt-2 text-gray-500">
+          It looks like the page was removed, or you mistyped the address.
+        </p>
+      </div>
+      <div class="mt-8">
+        <a
+          href="/"
+          class="px-6 py-2 text-black bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition duration-300">
+          Go Back Home
+        </a>
+      </div>
+      <div class="mt-8">
+        <h1><%= message %></h1>
+        <h2><%= error.status %></h2>
+      </div>
+    </div>
+  </body>
+</html>
