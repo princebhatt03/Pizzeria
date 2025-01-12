@@ -7,6 +7,7 @@ const adminHomeController = require('../controllers/adminHome.controller');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cartController = require('../controllers/cart.controller');
+const orderController = require('../controllers/order.controller');
 
 // Middleware setup
 router.use(
@@ -21,22 +22,24 @@ router.use(flash());
 
 // Authentication middlewares
 function isLoggedIn(req, res, next) {
-  if (req.session.user) {
+  if (req.session?.user?._id) {
     return next();
   }
+  req.flash('error', 'You must be logged in to access this page');
   res.redirect('/login');
 }
 
 function isAdminLoggedIn(req, res, next) {
-  if (req.session.admin) {
+  if (req.session?.admin?._id) {
     return next();
   }
+  req.flash('error', 'You must be logged in as admin to access this page');
   res.redirect('/adminLogin');
 }
 
 // User Routes
 router.get('/', homeController().index);
-router.get('/cart', isLoggedIn, cartController().index);
+router.get('/cart', cartController().index);
 
 router.get('/prof', isLoggedIn, (req, res) => {
   const success = req.flash('success');
@@ -113,7 +116,7 @@ router.post('/login', async (req, res) => {
       return res.redirect('/login');
     }
 
-    req.session.user = { id: user._id, username: user.username };
+    req.session.user = { _id: user._id, username: user.username };
     req.flash('success', 'Login successful!');
     res.redirect('/');
   } catch (error) {
@@ -126,7 +129,7 @@ router.post('/prof', isLoggedIn, async (req, res) => {
   try {
     const { username, currentPassword, newPassword, confirmPassword } =
       req.body;
-    const user = await userReg.findById(req.session.user.id);
+    const user = await userReg.findById(req.session.user._id);
 
     if (!user) throw new Error('User not found');
     if (currentPassword && user.password !== currentPassword) {
@@ -149,6 +152,12 @@ router.post('/prof', isLoggedIn, async (req, res) => {
     res.redirect('/prof');
   }
 });
+
+// Fetch orders for logged-in user
+router.get('/orders', isLoggedIn, orderController().index);
+
+// Save a new order
+router.post('/orders', isLoggedIn, orderController().store);
 
 router.post('/updateCart', cartController().update);
 
@@ -182,7 +191,7 @@ router.post('/adminLogin', async (req, res) => {
       return res.redirect('/adminLogin');
     }
 
-    req.session.admin = { id: admin._id, username: admin.username };
+    req.session.admin = { _id: admin._id, username: admin.username };
     req.flash('success', 'Admin login successful!');
     res.redirect('/admin');
   } catch (error) {

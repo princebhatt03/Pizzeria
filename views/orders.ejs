@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>orders</title>
+  </head>
+  <link
+    rel="stylesheet"
+    href="/stylesheets/style.css" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    .mrr {
+      margin-right: 10px;
+    }
+    .colG {
+      background-color: #ccffcc;
+      width: 100%;
+      color: #111;
+    }
+    .colR {
+      background-color: #faa0a0;
+      width: 100%;
+      color: #111;
+    }
+    .link {
+      color: rgb(245, 104, 53);
+    }
+  </style>
+  <body>
+    <div id="main">
+      <div
+        id="page"
+        class="w-full bg-red-400 relative h-screen">
+        <div
+          class="flex bg-yellow-50 justify-between items-center w-full h-20"
+          id="navbar">
+          <div class="flex justify-start items-center w-1/2 h-full nav1">
+            <img
+              class="w-48 h-20 object-contain mx-2 p-2"
+              src="/images/logo.png"
+              alt="LogoIMage" />
+          </div>
+          <div
+            class="w-1/2 h-full sm:flex justify-evenly items-center text-center nav2 hidden">
+            <a
+              class="text-lg font-semibold"
+              href="/"
+              >Home</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="#"
+              >About</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="/prof"
+              >Profile</a
+            >
+            <a
+              class="text-lg font-semibold"
+              href="<%= username ? '/logout' : '/login' %>">
+              <%= username ? 'Logout' : 'Login' %>
+            </a>
+          </div>
+          <a
+            class="text-lg px-4 py-2 mrr flex items-center bg-orange-500 rounded-full font-semibold"
+            href="/cart">
+            <span
+              id="cartCounter"
+              class="text-white font-bold pr-2"
+              ><%= session.cart ? session.cart.totalQty : '' %></span
+            >
+            <i class="text-white ri-shopping-cart-line"></i>
+          </a>
+          <div class="sm:hidden bars">
+            <i
+              id="menu1"
+              class="text-3xl p-4 ri-menu-line transition-all duration-900 ease-in-out"></i>
+            <i
+              id="menu2"
+              class="hidden text-3xl p-4 ri-close-line transition-all duration-900 ease-in-out"></i>
+          </div>
+        </div>
+        <div
+          id="nav-menu"
+          class="w-[90%] z-20 transition-all duration-900 ease-in-out absolute left-[100%] rounded-lg bg-yellow-50 h-50 flex justify-center shadow-2xl items-center flex-col p-2 m-4 sm:hidden">
+          <a
+            class="text-lg p-2 font-semibold"
+            href="/"
+            >Home</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="#"
+            >About</a
+          >
+          <a
+            class="text-lg p-2 font-semibold"
+            href="/prof"
+            >Profile</a
+          >
+          <a
+            class="text-lg font-semibold"
+            href="<%= username ? '/logout' : '/login' %>">
+            <%= username ? 'Logout' : 'Login' %>
+          </a>
+        </div>
+        <% if (messages.success && messages.success.length > 0) { %>
+        <div class="colG p-4"><%= messages.success %></div>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <div class="colR p-4"><%= messages.error %></div>
+        <% } %>
+        <div
+          class="w-full sm:flex flex justify-center items-center h-[calc(100%-80px)] bg-[#fddede]"
+          id="page1-container1">
+          <div class="sm:w-[70%] p-10 w-auto sm:h-auto h-[100%]">
+            <h2 class="text-black p-4 font-semibold text-xl">All Orders</h2>
+            <table class="w-full table-auto bg-white">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left">Orders</th>
+                  <th class="px-4 py-2 text-left">Address</th>
+                  <th class="px-4 py-2 text-left">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (orders && orders.length > 0) { %> 
+                <% orders.forEach((order) => { %>
+                <tr>
+                  <td class="border px-4 py-2">
+                    <a
+                      class="link"
+                      href="#"
+                      ><%= order._id %></a
+                    >
+                  </td>
+                  <td class="border px-4 py-2"><%= order.address %></td>
+                  <td class="border px-4 py-2">
+                    <%= new Date(order.createdAt).toLocaleString() %>
+                  </td>
+                </tr>
+                <% }) %>
+                <% } else { %>
+                <tr>
+                  <td
+                    class="border px-4 py-2 text-center"
+                    colspan="3">
+                    No Orders Found!
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

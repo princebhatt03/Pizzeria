@@ -29,6 +29,16 @@
       overflow-x: hidden;
       height: 100%;
     }
+    .colG {
+      background-color: #ccffcc;
+      width: 100%;
+      color: #111;
+    }
+    .colR {
+      background-color: #faa0a0;
+      width: 100%;
+      color: #111;
+    }
   </style>
   <body>
     <div id="main">
@@ -53,8 +63,8 @@
             >
             <a
               class="text-lg font-semibold"
-              href="#"
-              >About</a
+              href="/orders"
+              >Orders</a
             >
             <a
               class="text-lg font-semibold"
@@ -81,8 +91,8 @@
           >
           <a
             class="text-lg p-2 font-semibold"
-            href="#"
-            >About</a
+            href="/orders"
+            >Orders</a
           >
           <a
             class="text-lg p-2 font-semibold"
@@ -90,7 +100,11 @@
             >Logout</a
           >
         </div>
-        <% if(session.cart){ %>
+        <% if (messages.success && messages.success.length > 0) { %>
+        <div class="colG p-4"><%= messages.success %></div>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <div class="colR p-4"><%= messages.error %></div>
+        <% } %> <% if(session.cart){ %>
         <div
           class="w-full flex items-center justify-center flex-col min-h-[calc(100%-80px)] bg-[#fddede]"
           id="page1-container2">
@@ -99,7 +113,7 @@
           <% for(let pizza of Object.values(session.cart.items)) {%>
 
           <div
-            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-t-2 border-gray-500 justify-between">
+            class="sm:flex block min-w-[50%] p-5 items-center mt-6 border-t-2 border-b-2 border-gray-500 justify-between">
             <div class="sm:flex block flex-row items-center justify-center">
               <img
                 class="w-32 mt-2 h-32 sm:ml-0 ml-5"
@@ -122,10 +136,50 @@
             </p>
           </div>
           <% } %>
-          <h1 class="sm:text-xl text-lg font-semibold">
+          <h1
+            class="sm:text-xl mt-6 text-left text-lg font-semibold text-gray-800">
             Total Amount:
-            <span class="text-orange-500">₹<%= session.cart.totalPrice %></span>
+            <span class="text-orange-600 font-bold"
+              >₹<%= session.cart.totalPrice %></span
+            >
           </h1>
+          <div class="form-div flex flex-col items-center justify-center">
+            <form
+              action="/orders"
+              method="post">
+              <div class="mt-4 flex flex-col items-center">
+                <input
+                  name="customerId"
+                  class="w-48 h-8 px-6 py-4 focus:ring-2 focus:ring-orange-500 rounded-lg mt-2 border-2 border-gray-300 bg-white shadow-md transition-all duration-300 focus:outline-none focus:border-orange-400 text-gray-700 placeholder-gray-500 hover:bg-gray-50"
+                  type="text"
+                  placeholder="Create an Customer Id" />
+                <input
+                  name="phone"
+                  class="w-48 h-8 px-6 py-4 focus:ring-2 focus:ring-orange-500 rounded-lg mt-2 border-2 border-gray-300 bg-white shadow-md transition-all duration-300 focus:outline-none focus:border-orange-400 text-gray-700 placeholder-gray-500 hover:bg-gray-50"
+                  type="tel"
+                  placeholder="Enter Your Phone Number..." />
+                <input
+                  name="address"
+                  class="w-48 h-8 px-6 py-4 focus:ring-2 focus:ring-orange-500 rounded-lg mt-2 border-2 border-gray-300 bg-white shadow-md transition-all duration-300 focus:outline-none focus:border-orange-400 text-gray-700 placeholder-gray-500 hover:bg-gray-50"
+                  type="text"
+                  placeholder="Enter your address here..." />
+              </div>
+              <div class="mt-4 flex items-center justify-center">
+                <% if (session.user) { %>
+                <button
+                  class="bg-orange-600 p-2 text-white font-bold rounded-lg">
+                  Order Now
+                </button>
+                <% } else { %>
+                <button
+                  onclick="location.href='/login'"
+                  class="bg-orange-600 p-2 text-white font-bold rounded-lg">
+                  Login to Order
+                </button>
+                <% } %>
+              </div>
+            </form>
+          </div>
         </div>
         <%} else{ %>
         <div
