@@ -56,25 +56,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Change Order Status
 
-let hiddenInput = document.querySelector('#hiddenInput');
-let statuses = document.querySelectorAll('#status_line');
-let order = hiddenInput ? hiddenInput.value : null;
-order = JSON.parse(order);
+document.addEventListener('DOMContentLoaded', () => {
+  let statuses = document.querySelectorAll('.status_line');
+  let hiddenInput = document.querySelector('#hiddenInput');
+  let order = hiddenInput ? JSON.parse(hiddenInput.value) : null;
+  let time = document.createElement('small');
 
-function updateStatus(order) {
-  let stepCompleted = true;
-  statuses.forEach(status => {
-    let dataProp = status.dataset.status;
-    if (stepCompleted) {
-      status.classList.add('step-completed');
-    }
-    if (dataProp === order.status) {
-      stepCompleted = false;
-      if (status.nextElementSibling) {
-        status.nextElementSibling.classList.add('current');
+  function updateStatus(order) {
+    let stepCompleted = true;
+
+    statuses.forEach(status => {
+      let dataProp = status.dataset.status;
+
+      if (stepCompleted) {
+        status.classList.add('step-completed');
       }
-    }
-  });
-}
 
-updateStatus(order);
+      if (dataProp === order.status) {
+        stepCompleted = false;
+        time.innerText = moment(order.updatedAt).format('hh:mm A');
+        status.appendChild(time);
+        if (status.nextElementSibling) {
+          status.nextElementSibling.classList.add('current');
+        }
+      }
+    });
+  }
+
+  if (order) {
+    updateStatus(order);
+  }
+});
+
+// Socket
+

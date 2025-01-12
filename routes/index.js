@@ -10,6 +10,11 @@ const cartController = require('../controllers/cart.controller');
 const orderController = require('../controllers/order.controller');
 const adminOrdersController = require('../controllers/adminOrders.controller');
 const statusController = require('../controllers/status.controller');
+// const PORT = process.env.PORT || 3000;
+// const io = require('socket.io')(PORT);
+// io.on('connnection', () => {
+
+// });
 
 // Middleware setup
 router.use(
