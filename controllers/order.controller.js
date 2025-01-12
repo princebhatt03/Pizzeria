@@ -59,8 +59,8 @@ function orderController() {
       try {
         const order = await Order.findById(req.params.id);
         if (!order) {
-          req.flash('error', 'Order not found');
-          return res.redirect('/');
+          req.flash('success', 'Order Completed Successfully');
+          return res.redirect('/rate');
         }
 
         if (req.session.user._id.toString() === order.customerId.toString()) {

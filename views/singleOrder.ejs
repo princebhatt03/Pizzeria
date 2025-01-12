@@ -46,6 +46,22 @@
       color: blue;
       font-weight: bold;
     }
+
+    .refresh-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin-top: 10px;
+      color: white;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .refresh-button:hover {
+      background-color: #1d4ed8;
+    }
   </style>
   <body>
     <div id="main">
@@ -100,9 +116,18 @@
             </div>
           </section>
         </div>
+        <button
+          class="refresh-button"
+          onclick="refreshPage()">
+          Refresh
+        </button>
       </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      function refreshPage() {
+        location.reload();
+      }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="/javascripts/script.js"></script>
   </body>

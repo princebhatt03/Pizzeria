@@ -164,6 +164,12 @@ router.post('/prof', isLoggedIn, async (req, res) => {
 
 router.post('/orders', isLoggedIn, orderController().store);
 
+router.get('/rate', function (req, res) {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('rate', { success, error });
+});
+
 router.post('/updateCart', cartController().update);
 
 router.post('/status', isAdminLoggedIn, statusController().update);

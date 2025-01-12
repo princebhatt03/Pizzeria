@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Experience Rating</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        width: 40%;
+        text-align: center;
+      }
+
+      .stars {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .star {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .star.selected {
+        color: #fbbf24;
+      }
+
+      .rating-message {
+        margin: 10px 0;
+        font-size: 1rem;
+        color: #333;
+      }
+
+      .colG {
+        background-color: #ccffcc;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        color: #111;
+      }
+      .colR {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        background-color: #faa0a0;
+        color: #111;
+      }
+
+      .button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .button.submit {
+        background-color: #2563eb;
+        color: #fff;
+      }
+
+      .button.submit:hover {
+        background-color: #1d4ed8;
+      }
+
+      .button.home {
+        background-color: #e5e7eb;
+        color: #000;
+      }
+
+      .button.home:hover {
+        background-color: #d1d5db;
+      }
+
+      @media screen and (max-width: 600px) {
+        .container {
+          background-color: #fff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          padding: 20px;
+          width: 90%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <% if (messages.success && messages.success.length > 0) { %>
+      <div class="colG p-4"><%= messages.success %></div>
+      <% } %> <% if (messages.error && messages.error.length > 0) { %>
+      <div class="colR p-4"><%= messages.error %></div>
+      <% } %>
+      <h1>Rate Your Delivery Experience</h1>
+      <div class="stars">
+        <span
+          class="star"
+          data-value="1"
+          >&#9733;</span
+        >
+        <span
+          class="star"
+          data-value="2"
+          >&#9733;</span
+        >
+        <span
+          class="star"
+          data-value="3"
+          >&#9733;</span
+        >
+        <span
+          class="star"
+          data-value="4"
+          >&#9733;</span
+        >
+        <span
+          class="star"
+          data-value="5"
+          >&#9733;</span
+        >
+      </div>
+      <p
+        id="rating-message"
+        class="rating-message"></p>
+      <button
+        id="submit-rating"
+        class="button submit">
+        Submit Rating
+      </button>
+      <button
+        onclick="location.href='/'"
+        class="button home">
+        Go to Home
+      </button>
+    </div>
+
+    <script>
+      const stars = document.querySelectorAll('.star');
+      const ratingMessage = document.getElementById('rating-message');
+      let selectedRating = 0;
+
+      stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+          selectedRating = index + 1;
+          updateStars(selectedRating);
+          updateMessage(selectedRating);
+        });
+      });
+
+      function updateStars(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add('selected');
+          } else {
+            star.classList.remove('selected');
+          }
+        });
+      }
+
+      function updateMessage(rating) {
+        ratingMessage.textContent = `You have rated ${rating} star${
+          rating > 1 ? 's' : ''
+        }.`;
+      }
+
+      document.getElementById('submit-rating').addEventListener('click', () => {
+        if (selectedRating > 0) {
+          alert(`Thank you for rating us ${selectedRating} stars!`);
+        } else {
+          alert('Please select a star rating before submitting.');
+        }
+      });
+    </script>
+  </body>
+</html>
