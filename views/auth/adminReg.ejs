@@ -55,11 +55,6 @@
         <div
           class="w-full flex flex-col items-center justify-center min-h-full bg-[#fddede]"
           id="page1-container1">
-          <% if (messages.success && messages.success.length > 0) { %>
-          <div class="colG p-4 mb-4"><%= messages.success %></div>
-          <% } %> <% if (messages.error && messages.error.length > 0) { %>
-          <div class="colR p-4 mb-4"><%= messages.error %></div>
-          <% } %>
           <h1 class="text-center text-3xl font-semibold mb-5">
             Register as a Admin
           </h1>
@@ -68,6 +63,11 @@
             method="post"
             class="bg-yellow-50 flex items-start p-4 justify-center flex-col sm:w-[30%] w-[90%] min-h-[50%]"
             id="login-box">
+            <% if (messages.success && messages.success.length > 0) { %>
+            <div class="colG p-4 mb-4"><%= messages.success %></div>
+            <% } %> <% if (messages.error && messages.error.length > 0) { %>
+            <div class="colR p-4 mb-4"><%= messages.error %></div>
+            <% } %>
             <h3 class="text-lg my-2 font-semibold">Username</h3>
             <input
               class="w-[90%] bg-orange-100 rounded-md p-2 h-8 border-gray-300"
