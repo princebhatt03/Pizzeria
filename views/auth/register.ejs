@@ -28,6 +28,16 @@
         overflow-x: hidden;
         height: 100%;
       }
+      .colG {
+        background-color: #ccffcc;
+        width: 100%;
+        color: #111;
+      }
+      .colR {
+        background-color: #faa0a0;
+        width: 100%;
+        color: #111;
+      }
     </style>
   </head>
   <body>
@@ -42,14 +52,14 @@
             src="/images/logo.png"
             alt="Logo" />
         </div>
-        <% if (messages.success && messages.success.length > 0) { %>
-        <div class="colG p-4 mb-4"><%= messages.success %></div>
-        <% } %> <% if (messages.error && messages.error.length > 0) { %>
-        <div class="colR p-4 mb-4"><%= messages.error %></div>
-        <% } %>
         <div
           class="w-full flex flex-col items-center justify-center h-full bg-[#fddede]"
           id="page1-container1">
+          <% if (messages.success && messages.success.length > 0) { %>
+          <div class="colG p-4 mb-4"><%= messages.success %></div>
+          <% } %> <% if (messages.error && messages.error.length > 0) { %>
+          <div class="colR p-4 mb-4"><%= messages.error %></div>
+          <% } %>
           <h1 class="text-center text-3xl font-semibold mb-5">
             Register as a User
           </h1>
