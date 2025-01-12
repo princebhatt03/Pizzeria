@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const cartController = require('../controllers/cart.controller');
 const orderController = require('../controllers/order.controller');
 const adminOrdersController = require('../controllers/adminOrders.controller');
+const statusController = require('../controllers/status.controller');
 
 // Middleware setup
 router.use(
@@ -161,6 +162,8 @@ router.post('/orders', isLoggedIn, orderController().store);
 router.post('/updateCart', cartController().update);
 
 router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
+
+router.post('/status', isAdminLoggedIn, statusController().update);
 
 router.post('/adminReg', async (req, res) => {
   try {
