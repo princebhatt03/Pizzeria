@@ -4,10 +4,16 @@ function statusController() {
   return {
     async update(req, res) {
       try {
-        await Order.updateOne(
-          { _id: req.body.orderId },
-          { status: req.body.status }
-        );
+        const { orderId, status } = req.body;
+
+        if (status === 'completed') {
+          // Delete the order if the status is "completed"
+          await Order.findByIdAndDelete(orderId);
+        } else {
+          // Otherwise, just update the status
+          await Order.updateOne({ _id: orderId }, { status });
+        }
+
         return res.redirect('/adminOrders');
       } catch (err) {
         console.error('Error updating order status:', err);

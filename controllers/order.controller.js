@@ -1,5 +1,4 @@
 const Order = require('../models/orders');
-const order = require('../models/orders');
 
 function orderController() {
   return {
@@ -7,7 +6,7 @@ function orderController() {
       const { customerId, phone, address } = req.body;
 
       if (!customerId || !phone || !address) {
-        req.flash('error', 'All Fields are Required');
+        req.flash('error', 'All fields are required');
         return res.redirect('/cart');
       }
 
@@ -16,19 +15,20 @@ function orderController() {
         customerId: req.session.user._id,
         phone,
         address,
+        status: 'pending', // Default status for new orders
       });
 
       order
         .save()
         .then(() => {
-          req.flash('success', 'Order Placed Successfully');
+          req.flash('success', 'Order placed successfully');
           return res.redirect('/orders');
         })
         .catch(err => {
           console.error(err);
           req.flash(
             'error',
-            'You can Only make 1 Order at a time, after your first order you can make another...'
+            'You can only make one order at a time. After completing your first order, you can place another.'
           );
           return res.redirect('/cart');
         });
@@ -36,9 +36,12 @@ function orderController() {
 
     async index(req, res) {
       try {
+        // Fetch orders with a status that is not "completed"
         const orders = await Order.find({
           customerId: req.session.user._id,
+          status: { $ne: 'completed' }, // Completed orders are already deleted
         }).sort('-createdAt');
+
         res.render('orders', {
           orders,
           success: req.flash('success'),
@@ -51,16 +54,15 @@ function orderController() {
         res.redirect('/');
       }
     },
+
     async show(req, res) {
       try {
-        // Use the imported Order model (ensure it's imported correctly)
         const order = await Order.findById(req.params.id);
         if (!order) {
           req.flash('error', 'Order not found');
           return res.redirect('/');
         }
 
-        // Ensure the logged-in user is authorized to view this order
         if (req.session.user._id.toString() === order.customerId.toString()) {
           return res.render('singleOrder', { order });
         }
