@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Single Order</title>
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .status_box ul li.step-completed span::after {
+      background: gray;
+    }
+    .status_box ul li.step-completed span {
+      color: gray;
+    }
+
+    .status_box ul li.current span {
+      color: orangered;
+    }
+    .status_box ul li.current span::after {
+      color: orangered;
+    }
+  </style>
+  <body>
+    <div id="main">
+      <div
+        class="w-full h-screen flex-col flex items-center justify-center bg-red-600"
+        id="page1">
+        <div
+          class="w-[90%] status_box sm:w-[70%] h-[70%] bg-pink-500"
+          id="track-div">
+          <section class="status">
+            <div class="container mx-auto">
+              <div class="status-box w-full lg:w-2/3 mx-auto">
+                <div class="flex items-center justify-between mb-12">
+                  <h1 class="text-xl font-bold">Track delivery status</h1>
+                  <h6
+                    class="bg-white py-1 rounded-full px-4 text-green-600 text-xs">
+                    <%= order._id %>
+                  </h6>
+                  <input
+                    id="hiddenInput"
+                    type="hidden"
+                    value="<%= JSON.stringify(order) %>" />
+                </div>
+                <ul>
+                  <li
+                    class="status_line text-sm md:text-xl pb-16"
+                    data-status="order_placed">
+                    <span>Order Placed</span>
+                  </li>
+                  <li
+                    class="status_line text-sm md:text-xl pb-16"
+                    data-status="confirmed">
+                    <span>Order confirmation</span>
+                  </li>
+                  <li
+                    class="status_line text-sm md:text-xl pb-16"
+                    data-status="prepared">
+                    <span>Preparation</span>
+                  </li>
+                  <li
+                    class="status_line text-sm md:text-xl pb-16"
+                    data-status="delivered">
+                    <span>Out for delivery </span>
+                  </li>
+                  <li
+                    class="status_line text-sm md:text-xl"
+                    data-status="completed">
+                    <span>Complete</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

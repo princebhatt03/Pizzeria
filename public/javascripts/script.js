@@ -54,3 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Change Order Status
+
+let hiddenInput = document.querySelector('#hiddenInput');
+let statuses = document.querySelectorAll('#status_line');
+let order = hiddenInput ? hiddenInput.value : null;
+order = JSON.parse(order);
+
+function updateStatus(order) {
+  let stepCompleted = true;
+  statuses.forEach(status => {
+    let dataProp = status.dataset.status;
+    if (stepCompleted) {
+      status.classList.add('step-completed');
+    }
+    if (dataProp === order.status) {
+      stepCompleted = false;
+      if (status.nextElementSibling) {
+        status.nextElementSibling.classList.add('current');
+      }
+    }
+  });
+}
+
+updateStatus(order);

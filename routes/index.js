@@ -163,6 +163,8 @@ router.post('/updateCart', cartController().update);
 
 router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
 
+router.get('/singleOrder/:id', isLoggedIn, orderController().show);
+
 router.post('/status', isAdminLoggedIn, statusController().update);
 
 router.post('/adminReg', async (req, res) => {

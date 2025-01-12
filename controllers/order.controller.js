@@ -1,4 +1,5 @@
 const Order = require('../models/orders');
+const order = require('../models/orders');
 
 function orderController() {
   return {
@@ -48,6 +49,28 @@ function orderController() {
         console.error(err);
         req.flash('error', 'Could not fetch orders, please try again');
         res.redirect('/');
+      }
+    },
+    async show(req, res) {
+      try {
+        // Use the imported Order model (ensure it's imported correctly)
+        const order = await Order.findById(req.params.id);
+        if (!order) {
+          req.flash('error', 'Order not found');
+          return res.redirect('/');
+        }
+
+        // Ensure the logged-in user is authorized to view this order
+        if (req.session.user._id.toString() === order.customerId.toString()) {
+          return res.render('singleOrder', { order });
+        }
+
+        req.flash('error', 'You are not authorized to view this order');
+        return res.redirect('/');
+      } catch (err) {
+        console.error('Error fetching order:', err);
+        req.flash('error', 'Something went wrong');
+        return res.redirect('/');
       }
     },
   };
