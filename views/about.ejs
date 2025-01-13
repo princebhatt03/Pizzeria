@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>About Page</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f3f4f6;
+        color: #333;
+      }
+
+      .about-container {
+        text-align: center;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #1e293b;
+      }
+
+      p {
+        text-align: center;
+        width: 70%;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        margin-left: 15%;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .button {
+        text-decoration: none;
+        color: #fff;
+        background: #1d4ed8;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      .button:hover {
+        background: #2563eb;
+      }
+
+      .created-by {
+        margin-top: 20px;
+        font-size: 0.9rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: #1d4ed8;
+        transition: color 0.3s ease;
+      }
+      .created-by a {
+        text-decoration: none;
+        color: #1d4ed8;
+        transition: color 0.3s ease;
+      }
+
+      .created-by a:hover {
+        color: #2563eb;
+      }
+      @media screen and (max-width: 768px) {
+        p {
+          text-align: center;
+          width: 70%;
+          font-size: 15px;
+          margin-bottom: 20px;
+          margin-left: 15%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="about-container">
+      <h1>About Us</h1>
+      <p>
+        Pizzeria is a full-stack real-time pizza delivery application developed
+        using Node.js, Express.js, and MongoDB. The project is hosted on GitHub,
+        Render, and MongoDB Atlas. Designed to provide a seamless pizza ordering
+        experience, it incorporates user-friendly interfaces and robust backend
+        functionality to support real-time updates and efficient order
+        management.
+      </p>
+      <p>
+        GitHub Repository Link:
+        <a href="https://github.com/princebhatt03/Pizzeria">GitHub</a>
+      </p>
+
+      <div class="buttons">
+        <a
+          href="/"
+          class="button"
+          >Back to Home</a
+        >
+      </div>
+      <div class="created-by">
+        <p>
+          Created by
+          <a
+            href="https://www.linkedin.com/in/prince-bhatt-0958a725a/"
+            target="_blank"
+            >Prince Bhatt</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

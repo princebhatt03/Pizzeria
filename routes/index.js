@@ -67,6 +67,10 @@ router.get('/reg', (req, res) => {
   });
 });
 
+router.get('/about', (req, res) => {
+  res.render('about');
+});
+
 router.get('/orders', isLoggedIn, orderController().index);
 
 router.get('/adminOrders', isAdminLoggedIn, adminOrdersController().index);
