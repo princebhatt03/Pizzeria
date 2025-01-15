@@ -29,14 +29,14 @@
         height: 100%;
       }
       .colG {
-        background-color: #ccffcc;
+        background-color: #4caf50;
         width: 100%;
-        color: #111;
+        color: white;
       }
       .colR {
-        background-color: #faa0a0;
+        background-color: #f44336;
         width: 100%;
-        color: #111;
+        color: white;
       }
       .upp {
         text-transform: uppercase;
@@ -147,9 +147,9 @@
                   ><%= username %></a
                 >
               </p>
-
               <h1 class="sm:text-7xl text-4xl mt-2 font-semibold">Get Start</h1>
               <button
+                onclick="location.href='/dashboard'"
                 class="w-40 h-10 mt-4 bg-orange-500 text-center rounded-full">
                 Add Pizzas
               </button>
@@ -168,7 +168,7 @@
         class="w-full h-screen relative bg-yellow-50"
         id="page2">
         <h2 class="text-center text-2xl font-semibold p-2">
-          All Pizzas Added by You
+          All Pizzas Added on Pizzeria by Cooks
         </h2>
         <div
           id="page2-container1"
@@ -186,11 +186,6 @@
             </button>
             <div class="flex mt-4 justify-between items-center gap-4">
               <p class="text-lg font-semibold">₹<%= pizza.price %></p>
-              <button
-                onclick="alert('ADDED TO CART')"
-                class="w-20 h-10 bg-gray-100 font-semibold border-red-500 rounded-full">
-                <i class="ri-add-line"></i> Add
-              </button>
             </div>
           </div>
           <% }) %>

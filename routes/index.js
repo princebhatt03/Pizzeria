@@ -6,6 +6,8 @@ const homeController = require('../controllers/home.controller');
 const adminHomeController = require('../controllers/adminHome.controller');
 const session = require('express-session');
 const flash = require('connect-flash');
+const upload = require('./multer');
+const Product = require('../models/menu');
 const cartController = require('../controllers/cart.controller');
 const orderController = require('../controllers/order.controller');
 const adminOrdersController = require('../controllers/adminOrders.controller');
@@ -101,6 +103,37 @@ router.get('/adminProf', isAdminLoggedIn, (req, res) => {
   const { username, ID } = req.session.admin;
   res.render('adminProfile', { success, error, admin: { username, ID } });
 });
+
+router.get('/dashboard', isAdminLoggedIn, (req, res) => {
+  const success = req.flash('success');
+  const error = req.flash('error');
+  res.render('adminUpload', { success, error });
+});
+
+// POST route to upload a product
+router.post(
+  '/product',
+  upload.fields([{ name: 'image', maxCount: 1 }]),
+  async (req, res) => {
+    try {
+      const { name, price, size } = req.body;
+      const image = req.files['image'] ? req.files['image'][0].filename : null;
+      const newProduct = new Product({
+        name,
+        image,
+        price,
+        size,
+      });
+      await newProduct.save();
+      req.flash('success', 'Product uploaded successfully!');
+      res.redirect('/admin');
+    } catch (err) {
+      console.error('Error uploading product:', err);
+      req.flash('error', 'Failed to upload product. Please try again.');
+      res.redirect('/dashboard');
+    }
+  }
+);
 
 // User's Post Routes...
 

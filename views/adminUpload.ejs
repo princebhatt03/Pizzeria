@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Admin Upload</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: #f9fafb;
+      }
+
+      #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .colG {
+        background-color: #4caf50;
+        width: 100%;
+        color: white;
+      }
+      .colR {
+        background-color: #f44336;
+        width: 100%;
+        color: white;
+      }
+
+      form .form-group {
+        margin-bottom: 15px;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 0.875rem;
+        color: #555;
+      }
+
+      form input[type='text'],
+      form input[type='file'] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 0.875rem;
+      }
+
+      form input[type='text']:focus,
+      form input[type='file']:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+      }
+
+      form .submit-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      form .submit-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .admin-link {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .admin-link a {
+        text-decoration: none;
+        font-size: 0.875rem;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .admin-link a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .header h1 {
+          font-size: 1.25rem;
+        }
+
+        form .submit-btn {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div class="container">
+        <div class="header">
+          <h1>Upload Pizza</h1>
+        </div>
+        <% if (messages.success && messages.success.length > 0) { %>
+        <div class="colG p-4"><%= messages.success %></div>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <div class="colR p-4"><%= messages.error %></div>
+        <% } %>
+        <form
+          method="post"
+          action="/product"
+          enctype="multipart/form-data"
+          accept-charset="UTF-8">
+          <div class="form-group">
+            <label for="name">Pizza Title</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter the pizza title"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="image">Upload Pizza Image</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="price">Enter Amount</label>
+            <input
+              type="text"
+              name="price"
+              id="price"
+              placeholder="Enter the price"
+              required />
+          </div>
+          <div class="form-group">
+            <label for="size">Enter Size (Small, Medium, Large)</label>
+            <input
+              type="text"
+              name="size"
+              id="size"
+              placeholder="Enter available sizes"
+              required />
+          </div>
+          <input
+            type="submit"
+            value="Upload Pizza"
+            class="submit-btn" />
+        </form>
+        <div class="admin-link">
+          <a href="/admin">Go to Admin Page</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
