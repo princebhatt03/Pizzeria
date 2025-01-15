@@ -125,11 +125,11 @@ router.post(
         size,
       });
       await newProduct.save();
-      req.flash('success', 'Product uploaded successfully!');
+      req.flash('success', 'Pizza Added successfully!');
       res.redirect('/admin');
     } catch (err) {
       console.error('Error uploading product:', err);
-      req.flash('error', 'Failed to upload product. Please try again.');
+      req.flash('error', 'Failed to Add Pizza, Please try again.');
       res.redirect('/dashboard');
     }
   }
