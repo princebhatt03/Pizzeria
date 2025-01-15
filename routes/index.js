@@ -194,7 +194,7 @@ router.post('/prof', isLoggedIn, async (req, res) => {
     req.flash('success', 'Profile updated successfully');
     res.redirect('/');
   } catch (error) {
-    req.flash('error', 'Username already Exist');
+    req.flash('error', error.message);
     res.redirect('/');
   }
 });
