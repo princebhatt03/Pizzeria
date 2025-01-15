@@ -192,10 +192,47 @@ router.post('/prof', isLoggedIn, async (req, res) => {
 
     req.session.user.username = username;
     req.flash('success', 'Profile updated successfully');
-    res.redirect('/prof');
+    res.redirect('/');
   } catch (error) {
-    req.flash('error', error.message);
-    res.redirect('/prof');
+    req.flash('error', 'Username already Exist');
+    res.redirect('/');
+  }
+});
+
+// admin Profile Update Route....
+
+router.post('/adminProf', isAdminLoggedIn, async (req, res) => {
+  try {
+    const { username, ID, currentPassword, newPassword, confirmPassword } =
+      req.body;
+    const admin = await adminReg.findById(req.session.admin._id);
+
+    if (!admin) throw new Error('Admin not found');
+    if (currentPassword && admin.password !== currentPassword) {
+      throw new Error('Incorrect current password');
+    }
+    if (newPassword && newPassword !== confirmPassword) {
+      throw new Error('Passwords do not match');
+    }
+    const existingAdmin = await adminReg.findOne({
+      $or: [{ username }, { ID }],
+      _id: { $ne: req.session.admin._id },
+    });
+    if (existingAdmin) throw new Error('Username or Admin ID already exists');
+    if (username) admin.username = username;
+    if (ID) admin.ID = ID;
+    if (newPassword) admin.password = newPassword;
+    await admin.save();
+    if (username) req.session.admin.username = username;
+    if (ID) req.session.admin.ID = ID;
+    req.flash('success', 'Profile updated successfully');
+    res.redirect('/admin');
+  } catch (error) {
+    req.flash(
+      'error',
+      error.message || 'An error occurred while updating the profile'
+    );
+    res.redirect('/admin');
   }
 });
 
