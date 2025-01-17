@@ -15,7 +15,7 @@ function orderController() {
         customerId: req.session.user._id,
         phone,
         address,
-        status: 'pending', // Default status for new orders
+        status: 'pending', 
       });
 
       order
@@ -36,10 +36,9 @@ function orderController() {
 
     async index(req, res) {
       try {
-        // Fetch orders with a status that is not "completed"
         const orders = await Order.find({
           customerId: req.session.user._id,
-          status: { $ne: 'completed' }, // Completed orders are already deleted
+          status: { $ne: 'completed' }, 
         }).sort('-createdAt');
 
         res.render('orders', {
