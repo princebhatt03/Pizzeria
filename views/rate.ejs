@@ -5,7 +5,11 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
-    <title>Delivery Experience Rating</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.png"
+      type="image/x-icon" />
+    <title>Pizzeria : Delivery Experience Rating</title>
     <style>
       * {
         margin: 0;
@@ -157,6 +161,7 @@
     </div>
 
     <script>
+      const submitRating = document.querySelector('#submit-rating');
       const stars = document.querySelectorAll('.star');
       const ratingMessage = document.getElementById('rating-message');
       let selectedRating = 0;
@@ -187,7 +192,9 @@
 
       document.getElementById('submit-rating').addEventListener('click', () => {
         if (selectedRating > 0) {
-          alert(`Thank you for rating us ${selectedRating} stars!`);
+          ratingMessage.textContent = `Thanks for rating ${selectedRating} Stars`;
+          submitRating.textContent = `Rating Submitted`;
+          // alert(`Thank you for rating us ${selectedRating} stars!`);
         } else {
           alert('Please select a star rating before submitting.');
         }

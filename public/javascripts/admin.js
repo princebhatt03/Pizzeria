@@ -59,7 +59,7 @@ function initAdmin() {
                   }>Prepared</option>
                   <option value="Out for delivery" ${
                     order.status === 'Out for delivery' ? 'selected' : ''
-                  }>Delivered</option>
+                  }>Out for delivery</option>
                   <option value="completed" ${
                     order.status === 'completed' ? 'selected' : ''
                   }>Completed</option>
