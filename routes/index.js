@@ -108,7 +108,7 @@ router.post('/cartIncrease', (req, res) => {
     req.session.cart = cart;
     req.flash(
       'success',
-      `${pizzaItem.item.name} quantity increased. ${pizzaItem.qty} left.`
+      `${pizzaItem.item.name} Pizza quantity increased. ${pizzaItem.qty} in the cart.`
     );
   } else {
     req.flash('error', 'Item not found in cart');
