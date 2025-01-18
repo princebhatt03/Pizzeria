@@ -1,7 +1,6 @@
 function cartController() {
   return {
-      index(req, res) {
-          
+    index(req, res) {
       res.render('customer/cart');
     },
 
@@ -34,6 +33,26 @@ function cartController() {
 
       // Return the updated cart quantity
       return res.json({ totalQty: cart.totalQty, totalPrice: cart.totalPrice });
+    },
+
+    remove(req, res) {
+      if (!req.session.cart || !req.session.cart.items[req.body._id]) {
+        return res.status(400).json({ error: 'Item not found in cart' });
+      }
+
+      let cart = req.session.cart;
+
+      // Get item details
+      let item = cart.items[req.body._id];
+
+      // Update cart quantities and price
+      cart.totalQty -= item.qty;
+      cart.totalPrice -= item.item.price * item.qty;
+
+      // Remove item from cart
+      delete cart.items[req.body._id];
+      req.flash('success', `${removedItem.item.name} removed from the cart.`);
+      res.redirect('/cart');
     },
   };
 }

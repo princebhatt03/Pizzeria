@@ -47,6 +47,75 @@ router.get('/', homeController().index);
 
 router.get('/cart', cartController().index);
 
+// Post Route for Removing items from the cart...
+
+router.post('/cartRemove', (req, res) => {
+  const itemId = req.body._id;
+  if (!req.session.cart) {
+    req.flash('error', 'Cart does not exist!');
+    return res.redirect('/cart');
+  }
+
+  const cart = req.session.cart;
+  if (!cart.items[itemId]) {
+    req.flash('error', 'Item not found in cart!');
+    return res.redirect('/cart');
+  }
+
+  const removedItem = cart.items[itemId];
+  const itemQty = removedItem.qty;
+  const itemPrice = removedItem.item.price;
+  if (itemQty > 1) {
+    removedItem.qty -= 1;
+    cart.totalQty -= 1;
+    cart.totalPrice -= itemPrice;
+
+    req.flash(
+      'success',
+      `${removedItem.item.name} Pizza's quantity reduced. ${removedItem.qty} left.`
+    );
+  } else {
+    delete cart.items[itemId];
+    cart.totalQty -= 1;
+    cart.totalPrice -= itemPrice;
+
+    req.flash(
+      'success',
+      `${removedItem.item.name} Pizza removed from the cart.`
+    );
+  }
+  if (cart.totalQty <= 0) {
+    delete req.session.cart;
+  } else {
+    req.session.cart = cart;
+  }
+
+  res.redirect('/cart');
+});
+
+// Post Route for increasing cart Items...
+
+router.post('/cartIncrease', (req, res) => {
+  const { _id } = req.body;
+  const cart = req.session.cart;
+  let pizzaItem = cart.items[_id];
+
+  if (pizzaItem) {
+    pizzaItem.qty += 1;
+    cart.totalQty += 1;
+    cart.totalPrice += pizzaItem.item.price;
+
+    req.session.cart = cart;
+    req.flash(
+      'success',
+      `${pizzaItem.item.name} quantity increased. ${pizzaItem.qty} left.`
+    );
+  } else {
+    req.flash('error', 'Item not found in cart');
+  }
+  res.redirect('/cart');
+});
+
 router.get('/prof', isLoggedIn, (req, res) => {
   const success = req.flash('success');
   const error = req.flash('error');
@@ -111,6 +180,7 @@ router.get('/dashboard', isAdminLoggedIn, (req, res) => {
 });
 
 // POST route to upload a product
+
 router.post(
   '/product',
   upload.fields([{ name: 'image', maxCount: 1 }]),

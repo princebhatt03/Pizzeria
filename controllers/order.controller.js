@@ -5,22 +5,28 @@ function orderController() {
     store(req, res) {
       const { customerId, phone, address } = req.body;
 
+      // Check if all required fields are provided
       if (!customerId || !phone || !address) {
         req.flash('error', 'All fields are required');
         return res.redirect('/cart');
       }
 
+      // Create a new order with the details from the cart
       const order = new Order({
         items: req.session.cart.items,
         customerId: req.session.user._id,
         phone,
         address,
-        status: 'pending', 
+        status: 'pending',
       });
 
+      // Save the order and clear the cart
       order
         .save()
         .then(() => {
+          // Clear the cart in the session after order is saved
+          req.session.cart = null; // Remove the cart from session
+
           req.flash('success', 'Order placed successfully');
           return res.redirect('/orders');
         })
@@ -34,11 +40,12 @@ function orderController() {
         });
     },
 
+    // Other controller methods remain the same
     async index(req, res) {
       try {
         const orders = await Order.find({
           customerId: req.session.user._id,
-          status: { $ne: 'completed' }, 
+          status: { $ne: 'completed' }, // Only fetch pending orders
         }).sort('-createdAt');
 
         res.render('orders', {
