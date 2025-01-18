@@ -138,6 +138,8 @@ router.get('/reg', (req, res) => {
   });
 });
 
+// Orders Routes...
+
 router.get('/about', (req, res) => {
   res.render('about');
 });
