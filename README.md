@@ -1,5 +1,4 @@
-<h1 align="center">Project Pizzeria</h1>
-<h3 align="center">Full Stack Website</h3>
+<h1 align="center">Project title: Pizzeria</h1>
 
 Pizzeria is a full-stack real-time pizza delivery application developed using Node.js, Express.js, and MongoDB. The project is hosted on GitHub, Render, and MongoDB Atlas. Designed to provide a seamless pizza ordering experience, it incorporates user-friendly interfaces and robust backend functionality to support real-time updates and efficient order management.
 
