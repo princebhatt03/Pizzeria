@@ -3,9 +3,9 @@
 
 - 🔗Hosting: Render [Link](https://pizza-ria.onrender.com)
 
-- Technologies **JavaScript, NodeJS, ExpressJS, MongoDB**
+- ⚓Technologies **JavaScript, NodeJS, ExpressJS, MongoDB**
 
-- ⚓Tools : **Git, Githu**
+- ⚓Tools : **Git/Github, Postman, Render, MongoDB Atlas**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
