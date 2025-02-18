@@ -1,5 +1,5 @@
 <h1 align="center">Project Title: Pizzeria</h1>
-<p>QuickPick is a robust E-Commerce platform developed using modern web technologies, including Node.js, Express.js, MongoDB, and the EJS Template Engine. Designed to cater to both administrators and customers, the platform offers a seamless experience for managing and interacting with a variety of products.</p>
+<p>Pizzeria is a full-stack real-time pizza delivery application developed using Node.js, Express.js, and MongoDB. The project is hosted on GitHub, Render, and MongoDB Atlas. Designed to provide a seamless pizza ordering experience, it incorporates user-friendly interfaces and robust backend functionality to support real-time updates and efficient order management.</p>
 
 - 📫  For any Query: **princebhatt316@gmail.com**
 
@@ -8,4 +8,3 @@
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=princebhatt03&show_icons=true&locale=en&layout=compact" alt="princebhatt03" /></p>
 
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=princebhatt03&show_icons=true&locale=en" alt="princebhatt03" /></p>
