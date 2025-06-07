@@ -29,6 +29,11 @@ A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using *
 
 ---
 
+## 📷 Screenshot
+
+![s3](https://github.com/user-attachments/assets/5f2f63f2-c7d8-4e4b-982e-29c3c559e81e)
+
+
 ## ✨ Key Features
 
 ### 👤 User Side:
