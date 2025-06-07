@@ -1,13 +1,156 @@
-<h1 align="center">Project Title: Pizzeria</h1>
-<p>Pizzeria is a full-stack real-time pizza delivery application developed using Node.js, Express.js, and MongoDB. The project is hosted on GitHub, Render, and MongoDB Atlas. Designed to provide a seamless pizza ordering experience, it incorporates user-friendly interfaces and robust backend functionality to support real-time updates and efficient order management.</p>
+# 🍕 Real-Time Pizza Delivery Website
 
-- 🔭 Synopsis : **[Link](https://drive.google.com/file/d/1OzkFfpSzixvGQs6rOOMel_sYtbHmOAom/view?usp=drive_link)**
+A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using **Node.js**, **Express.js**, **MongoDB**, **EJS**, and **Tailwind CSS**. It supports user and admin login, real-time order tracking, and a fully functional admin dashboard for managing multiple orders simultaneously.
 
-- 📫 For Any Query **princebhatt316@gmail.com**
+---
 
-- 🔗 Visit Site : [Link](https://pizza-ria.onrender.com)
+## 📌 Live Demo
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> </p>
+👉 [[Project Demo Link Here](https://pizza-ria.onrender.com)](#) *(Replace with your actual deployment link)*
+
+---
+
+## 🛠️ Tech Stack
+
+### 🔧 Backend:
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- Socket.io (for real-time communication)
+
+### 🎨 Frontend:
+- EJS (Embedded JavaScript Templates)
+- Tailwind CSS
+
+### 🛡️ Authentication & Security:
+- Express-Session
+- bcrypt (for password hashing)
+- Role-based access control (User / Admin)
+
+---
+
+## ✨ Key Features
+
+### 👤 User Side:
+- User Registration & Login
+- Browse Pizza Menu
+- Add/Remove Pizzas to/from Cart
+- Place Orders
+- Real-time Order Status Updates
+- Order History View
+
+### 🧑‍💼 Admin Side:
+- Admin Login
+- Manage Orders in Real-Time
+- Change Order Status (e.g., Placed ➝ Prepared ➝ Delivered)
+- View All Orders with Timestamps and User Info
+
+### 🔁 Real-Time Functionality:
+- WebSockets via **Socket.io**
+- Live updates when admin changes order status
+- Admin dashboard auto-refreshes with new orders
+
+---
+
+## 📁 Folder Structure
+
+pizza-delivery-app/
+│
+├── public/ # Static files (images, js, css)
+├── src/
+│ ├── app.js # Main app file
+│ ├── config/ # Database & environment setup
+│ ├── controllers/ # Business logic for routes
+│ ├── models/ # Mongoose schemas (User, Order, etc.)
+│ ├── routes/ # All app routes
+│ ├── services/ # Middleware and socket setup
+│ ├── views/ # EJS templates (pages)
+│ └── utils/ # Helper functions
+└── README.md
 
 
+---
+
+## 🚦 How It Works
+
+1. **User registers or logs in.**
+2. On login, they’re taken to the **menu page** where they can add pizzas to the cart.
+3. Upon checkout, the **order is placed**, and a new record is saved in MongoDB.
+4. **Socket.io** emits the new order event to the **admin dashboard** in real-time.
+5. The **admin panel** lists all current orders. Admin can update the order status.
+6. As status changes, **real-time events** update the user interface dynamically.
+7. Both admin and user have access to **order history** and details.
+
+---
+
+## 🔐 Route Overview
+
+| Method | Route                   | Description                     |
+|--------|-------------------------|---------------------------------|
+| GET    | `/`                     | Home/Login page                 |
+| GET    | `/register`             | Registration page               |
+| POST   | `/register`             | Handle new user registration    |
+| POST   | `/login`                | Handle login                    |
+| GET    | `/menu`                 | Pizza selection page (user)     |
+| POST   | `/cart`                 | Add pizza to cart               |
+| POST   | `/order`                | Place order                     |
+| GET    | `/admin/orders`         | Admin dashboard                 |
+| POST   | `/admin/order/status`   | Update order status             |
+| GET    | `/logout`               | Logout and destroy session      |
+
+---
+
+## 🧠 Important Concepts Used
+
+- **MVC Architecture**: Clean separation of logic (Models, Views, Controllers).
+- **WebSockets (Socket.io)**: Used for real-time, bi-directional communication.
+- **Session-Based Auth**: Maintains user/admin session across pages.
+- **EJS + Tailwind**: Combines fast templating with modern UI styling.
+- **MongoDB**: Handles users, orders, cart data with flexibility.
+
+---
+
+## 🧪 Testing & Tools
+
+- **Postman**: For backend API testing
+- **MongoDB Compass**: GUI to inspect database documents
+- **Live Reloading**: Using `nodemon` for backend development
+- **Tailwind Play CDN**: For rapid styling
+
+---
+
+## ✅ Completed
+
+- User and Admin Authentication
+- Real-Time Order Placement & Tracking
+- Admin Dashboard with Live Order Updates
+- Full UI using Tailwind + EJS
+- Database Integration with MongoDB
+
+---
+
+## 🔧 What’s Remaining / Future Improvements
+
+- 🔲 Add Email Notifications on Order Placed / Delivered
+- 🔲 Add Search & Filter in Admin Dashboard
+- 🔲 Add Order Tracking Page with Map (Optional)
+- 🔲 Add Payment Gateway Integration (e.g., Razorpay, Stripe)
+- 🔲 Migrate to React or Next.js frontend for SPA experience
+- 🔲 Deploy on a production server (e.g., Render, Vercel, Railway)
+- 🔲 Add Unit & Integration Testing (Jest / Mocha)
+
+---
+
+## 🙋‍♂️ Author
+
+**Prince Bhatt**  
+📧 [Your Email]  
+🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
+📁 Portfolio: [GitHub](https://github.com/princebhatt03)
+
+---
+
+## 📜 License
+
+This project is for educational/demo purposes and is open to contributions, suggestions, and forks!  
+Feel free to build upon it and make it your own 🚀
