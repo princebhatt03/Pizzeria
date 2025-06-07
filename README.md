@@ -56,16 +56,57 @@ A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using *
 
 pizza-delivery-app/
 │
-├── public/ # Static files (images, js, css)
-├── src/
-│ ├── app.js # Main app file
-│ ├── config/ # Database & environment setup
-│ ├── controllers/ # Business logic for routes
-│ ├── models/ # Mongoose schemas (User, Order, etc.)
-│ ├── routes/ # All app routes
-│ ├── services/ # Middleware and socket setup
-│ ├── views/ # EJS templates (pages)
-│ └── utils/ # Helper functions
+├── public/                      # Static assets like CSS, JS, images
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── src/                         # Main application source code
+│   ├── config/                  # DB connection and environment configs
+│   │   └── db.js
+│   │
+│   ├── controllers/             # Route controllers (business logic)
+│   │   ├── authController.js
+│   │   ├── orderController.js
+│   │   └── adminController.js
+│   │
+│   ├── models/                  # Mongoose models
+│   │   ├── user.model.js
+│   │   ├── order.model.js
+│   │   └── pizza.model.js
+│   │
+│   ├── routes/                  # All route definitions
+│   │   ├── index.js
+│   │   ├── user.routes.js
+│   │   └── admin.routes.js
+│   │
+│   ├── services/                # Custom services (middleware, sockets)
+│   │   ├── socketService.js
+│   │   └── authMiddleware.js
+│   │
+│   ├── utils/                   # Utility/helper functions
+│   │   └── timeFormatter.js
+│   │
+│   ├── views/                   # EJS templates
+│   │   ├── layouts/
+│   │   │   └── main.ejs
+│   │   ├── partials/
+│   │   │   ├── header.ejs
+│   │   │   └── footer.ejs
+│   │   ├── users/
+│   │   │   ├── login.ejs
+│   │   │   ├── register.ejs
+│   │   │   ├── menu.ejs
+│   │   │   └── orderStatus.ejs
+│   │   └── admin/
+│   │       └── dashboard.ejs
+│   │
+│   ├── app.js                   # Entry point (Express setup)
+│   └── server.js                # Server initialization with Socket.io
+│
+├── .env                         # Environment variables
+├── .gitignore
+├── package.json
 └── README.md
 
 
