@@ -6,7 +6,7 @@ A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using *
 
 ## 📌 Live Demo
 
-👉 [Project Demo Link Here](https://pizza-ria.onrender.com)]
+👉 [Link(https://pizza-ria.onrender.com)]
 
 ---
 
