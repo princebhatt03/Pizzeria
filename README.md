@@ -6,7 +6,7 @@ A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using *
 
 ## 📌 Live Demo
 
-👉 [[Project Demo Link Here](https://pizza-ria.onrender.com)](#) *(Replace with your actual deployment link)*
+👉 [Project Demo Link Here](https://pizza-ria.onrender.com)]
 
 ---
 
@@ -144,7 +144,7 @@ pizza-delivery-app/
 ## 🙋‍♂️ Author
 
 **Prince Bhatt**  
-📧 [Your Email]  
+📧 [Email](Mailto:princebhatt316@gmail.com)  
 🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
 📁 Portfolio: [GitHub](https://github.com/princebhatt03)
 
