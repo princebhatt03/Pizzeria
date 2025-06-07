@@ -54,6 +54,7 @@ A Full-Stack Real-Time Pizza Ordering and Delivery Web Application built using *
 
 ## 📁 Folder Structure
 
+```
 pizza-delivery-app/
 │
 ├── public/                      # Static assets like CSS, JS, images
@@ -108,7 +109,7 @@ pizza-delivery-app/
 ├── .gitignore
 ├── package.json
 └── README.md
-
+```
 
 ---
 
