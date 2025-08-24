@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const store = new MongoStore({
-  uri: process.env.DATABASE_CONNECTION_STRING, // Use the same connection string as the main database
+  uri: process.env.DATABASE_CONNECTION_STRING,
   collection: 'sessions',
 });
 
@@ -51,10 +51,8 @@ app.use((req, res, next) => {
 
 // Flash middleware
 app.use(flash());
-
-// Make flash messages available in all views
 app.use((req, res, next) => {
-  res.locals.messages = req.flash(); // Make flash messages available in views
+  res.locals.messages = req.flash();
   next();
 });
 
@@ -76,5 +74,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-// Bug Fixed Commit...
